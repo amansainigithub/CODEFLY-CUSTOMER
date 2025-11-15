@@ -27,8 +27,9 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatIconModule} from '@angular/material/icon';
 import {MatDividerModule} from '@angular/material/divider';
-
-
+import {MatStepperModule} from '@angular/material/stepper';
+import {MatExpansionModule} from '@angular/material/expansion';
+import {MatSliderModule} from '@angular/material/slider';
 
 @NgModule({
   declarations: [
@@ -59,7 +60,10 @@ import {MatDividerModule} from '@angular/material/divider';
     MatProgressBarModule,
     MatMenuModule,
     MatDividerModule,
-    MatIconModule
+    MatIconModule,
+    MatStepperModule,
+    MatExpansionModule,
+    MatSliderModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [authInterceptorProviders, provideAnimationsAsync()],

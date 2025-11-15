@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../_services/auth.service';
-import { Route, Router } from '@angular/router';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 import { SnackBarHelperService } from '../_helpers/snackBar_Service/snack-bar-helper.service';
 import { NgToastService } from 'ng-angular-popup';
 import { TokenStorageService } from '../_services/token-storage.service';
+import { FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-register',
@@ -28,7 +28,8 @@ export class RegisterComponent {
     private router:Router,
     private _snackBarHelper: SnackBarHelperService,
     private toast:NgToastService,
-    private tokenStorageService:TokenStorageService) { }
+    private tokenStorageService:TokenStorageService,
+  private fb: FormBuilder) { }
 
   ngOnInit(): void {
    var node =  this.tokenStorageService.getUser();
@@ -102,6 +103,11 @@ verifyMobileOtp(){
 
 }
 
+
+
+
+// #################################################################################################################
+// ###################################################################################################################
 
 
 

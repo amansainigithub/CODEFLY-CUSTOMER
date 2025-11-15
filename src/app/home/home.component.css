@@ -1,0 +1,278 @@
+
+/* ################################################################################################################ */
+/* NAVBAR STARTING */
+/* Hover open */
+.navbar .dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+/* FIXED WIDTH MEGA MENU */
+.mega-menu {
+    position: absolute;
+    left: 10px !important;
+    /* always screen ke left se start */
+    right: 0;
+    /* full width */
+    width: 90%;
+    /* responsive full width */
+    top: 100%;
+    /* category ke niche */
+    padding: 200px;
+    z-index: 999;
+    border-radius: 14px;
+}
+
+/* Column title */
+.mega-menu h6 {
+    font-size: 12px;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+/* Items spacing */
+.dropdown-item {
+    padding: 4px 0;
+    font-size: 11px;
+}
+
+.mega-menu::before {
+    content: "";
+    position: absolute;
+    top: -10px;
+    /* 10px invisible zone */
+    left: 0;
+    width: 100%;
+    height: 10px;
+}
+
+
+/* Default dropdown items */
+.dropdown-item {
+    padding: 2px 4px;       /* thodi padding */
+    font-size: 11px;
+    border-radius: 4px;     /* soft corners */
+    transition: all 0.2s ease;   /* smooth animation */
+}
+
+/* Hover effect */
+.dropdown-item:hover {
+    background-color: #f0f0f0;
+    color: #1b1a1a;               
+    border-radius: 6px;        
+    padding-left: 10px;
+    color: #9136db;        
+
+}
+
+
+.dropdown-toggle:hover{
+     color: #9136db;        
+}
+
+/* NAVBAR ENDING */
+/* ################################################################################################################ */
+
+
+
+
+
+
+
+
+
+/* ################################################################################################################ *//*
+ SLIDER CSS START */
+.carousel-item img {
+  height: 400px;       
+  object-fit: cover;  
+  width: 100%;  
+  border-radius: 12px;    /* your required rounded corners */       
+}
+/* SLIDER CSS ENDING */
+/* ################################################################################################################ */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ################################################################################################################ */
+/* CATEGORY OR BRANDS CSS STARTING */
+.col-lg-2-4 {
+  width: 20%;
+  flex: 0 0 20%;
+}
+
+@media (max-width: 992px) {
+  .col-lg-2-4 {
+    width: 33.33%;
+    flex: 0 0 33.33%;
+  }
+}
+
+@media (max-width: 768px) {
+  .col-lg-2-4 {
+    width: 50%;
+    flex: 0 0 50%;
+  }
+}
+
+/* Card design */
+.custom-card {
+  border-radius: 9px;
+  overflow: hidden;
+  height: 320px;        /* card ki height thodi badha di */
+  transition: all 0.3s ease;
+  background: #fff;
+}
+
+.custom-card:hover {
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  transform: translateY(-3px);
+}
+
+/* Image fix */
+.custom-card img {
+  height: 250px;
+  object-fit: cover;
+}
+
+/* Category heading */
+.category-title {
+  font-size: 15px;
+  font-weight: 700;
+  font-family: 'Poppins', sans-serif;
+}
+/* CATEGORY OR BRANDS CSS ENDING */
+/* ################################################################################################################ */
+
+
+
+
+
+
+
+
+
+
+
+
+/* ################################################################################################################ */
+/* PRODUCT LIST STARTING CSS */
+
+.product-card {
+  border: 1px solid #ddd;
+  /* border-radius: 10px; */
+  overflow: hidden;
+  max-width: 220px; /* Custom width */
+  margin: auto;
+  display: flex;
+  text-decoration: none;
+  color: inherit;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
+  transition: box-shadow 0.3s ease-in-out;
+  border-radius: 8px;
+}
+.product-card:hover {
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.25);
+}
+.product-image-container {
+  overflow: hidden;
+  position: relative;
+}
+.product-image {
+  width: 100%;
+  max-height: 180px; /* Custom image height */
+  object-fit: cover;
+  transition: transform 0.3s;
+}
+.product-image:hover {
+  transform: scale(1.1);
+}
+.product-title {
+  font-weight: 500;
+  font-size: 14px;
+  color: #283747;
+  margin: 0;
+  padding: 0;
+}
+.productName{
+  font-size: 13px;
+  font-weight: 420;
+  color: #616a6b;
+}
+.cardBodyZero{
+  margin: 0;
+  padding: 0;
+}
+
+.actualPrice{
+  font-weight: 500;
+}
+
+.mrpPrice{
+  text-decoration: line-through;
+  font-size: 13px;
+  color: #717d7e;
+}
+.priceOff{
+  font-size: 11px;
+  font-weight: 450;
+  color: rgb(255, 255, 255);
+  background-color: rgb(221, 30, 30);
+  padding: 4px;
+  border-radius: 4px;
+}
+
+.rating-review {
+  position: absolute;
+  bottom: 4px;
+  left: 6px;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 11px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+}
+.rating-review i {
+  color: #FFD700;
+  margin: 0 5px;
+}
+.tag {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: rgba(0, 0, 0, 0.4);
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 10px;
+}
+
+/* PRODUCT LIST CSS ENDING */
+/* ################################################################################################################ */
+
+
+
+
+
+
+
+
+
+
+
+
