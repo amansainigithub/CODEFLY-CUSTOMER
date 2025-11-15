@@ -1,5 +1,8 @@
 import { Component, OnInit, signal } from '@angular/core';
 import { UserService } from '../_services/user.service';
+import { NgToastService } from 'ng-angular-popup';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { HomePageService } from '../_services/homePageService/homePage/home-page.service';
 
 @Component({
   selector: 'app-home',
@@ -10,11 +13,34 @@ export class HomeComponent implements OnInit {
   content?: string;
   readonly panelOpenState = signal(false);
 
-  constructor(private userService: UserService) { }
+  constructor(private homePageService: HomePageService,
+    private toast: NgToastService,
+    private spinner: NgxSpinnerService
+  ) { }
 
   ngOnInit(): void {
+    this.getHomePageData();
   }
 
+
+    sliderData:any;
+
+
+    getHomePageData() {
+    this.spinner.show();
+    this.homePageService.getHomePage().subscribe({
+      next: (res: any) => {
+        this.sliderData = res.data.slider;
+        console.log(res.data);
+        this.spinner.hide();
+      },
+      error: (err: any) => {
+        this.toast.error({ detail: 'Error',summary: err.error.data.message, position: 'bottomRight', duration: 3000, });
+        console.log(err);
+        this.spinner.hide();
+      },
+    });
+  }
 
 
 
