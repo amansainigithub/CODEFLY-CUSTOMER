@@ -24,14 +24,16 @@ export class HomeComponent implements OnInit {
 
 
     sliderData:any;
+    productData:any
 
 
     getHomePageData() {
     this.spinner.show();
     this.homePageService.getHomePage().subscribe({
       next: (res: any) => {
-        this.sliderData = res.data.slider;
-        console.log(res.data);
+        this.sliderData = res.data.sliderDtoList;
+        this.productData = res.data.productDetailsList
+        console.log(res);
         this.spinner.hide();
       },
       error: (err: any) => {

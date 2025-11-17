@@ -352,49 +352,50 @@
 
       <div class="row">
 
-        <ng-container *ngFor="let data of productsList">
+        <ng-container *ngFor="let data of productData">
 
           <!-- Perfect 5 Items Per Row -->
           <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6 mb-4">
 
-            <a  [routerLink]="['/pw']" [queryParams]="{size: data.productFirstSize,pI: data.id, pN: data.productName}"  class="card product-card h-100" >
+            <a  [routerLink]="['/pw']" [queryParams]="{productId: data.prouctId, pN: data.productName}" 
+             class="card product-card h-100" >
 
               <!-- Product Image -->
-              <div *ngIf="data?.productFilesResponses?.length" class="product-image-container">
+              <div *ngIf="data?.productMainFileUrl?.length" class="product-image-container">
                 <img
-                  src="../../assets/Product Dummy Images/16.jpg"
+                  [src]="data.productMainFileUrl"
                   alt="Product Image"
                   class="product-image img-fluid"
                 />
 
-                <div *ngIf="data.rating && data.reviewCount" class="rating-review">
-                  {{ data.rating }} <i class="bi bi-star-fill"></i> | {{ data.reviewCount }}
+                <div  class="rating-review">
+                  40 <i class="bi bi-star-fill"></i> | 300
                 </div>
 
-                <div class="tag">{{ data.materialType }}</div>
+                <div class="tag">{{ data.brand }}</div>
               </div>
 
               <!-- Product Details -->
-              <div *ngIf="data?.productFilesResponses?.length" class="px-2 mt-2">
-                <p class="product-title">{{ data.brandField }}</p>
+              <div  class="px-2 mt-2">
+                <p class="product-title">{{ data.brand }}</p>
 
                 <p class="productName mb-1">
                   {{ data.productName | slice: 0 : 30 }}
                   {{ data.productName.length > 36 ? '...' : '' }}
                 </p>
 
-                <ng-container *ngIf="data.netQuantity > 0; else outOfStock">
+                <ng-container *ngIf="data.inventory > 0; else outOfStock">
                   <p class="price-details">
-                    <span class="actualPrice">Rs.{{ data.productPrice }}</span>
-                    <span class="mrpPrice mx-1">Rs.{{ data.productMrp }}</span> 
+                    <span class="actualPrice">Rs.{{ data.price }}</span>
+                    <span class="mrpPrice mx-1">Rs.{{ data.mrp }}</span> 
                     <br>
-                    <span class="priceOff mx-1">({{ data.calculatedDiscount }})</span>
+                    <span class="priceOff mx-1">({{ data.productDiscount }})</span>
                     <span style="font-size: 10px;color: rgb(236, 76, 23);" >Limited Deal offer</span>
                   </p>
                 </ng-container>
 
                 <ng-template #outOfStock>
-                  <p class="fs13" style="color: rgb(222, 44, 44);">
+                  <p class="fs13 text-center font-weight-bold" style="color: rgb(222, 44, 44);">
                     Out of Stock
                   </p>
                 </ng-template>

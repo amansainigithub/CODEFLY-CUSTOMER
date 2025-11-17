@@ -193,7 +193,7 @@
 }
 .product-image {
   width: 100%;
-  max-height: 180px; /* Custom image height */
+  height: 180px; /* Custom image height */
   object-fit: cover;
   transition: transform 0.3s;
 }
