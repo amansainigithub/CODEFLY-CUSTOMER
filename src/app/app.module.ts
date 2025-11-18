@@ -6,10 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
-import { BoardUserComponent } from './board-user/board-user.component';
 import { authInterceptorProviders } from './_helpers/auth.interceptor';
-import { BoardAdminComponent } from './board-admin/board-admin.component';
-import { BoardModeratorComponent } from './board-moderator/board-moderator.component';
 import { ProfileComponent } from './profile/profile.component';
 import { HomeComponent } from './home/home.component';
 import {MatButtonModule} from '@angular/material/button';
@@ -30,20 +27,19 @@ import {MatDividerModule} from '@angular/material/divider';
 import {MatStepperModule} from '@angular/material/stepper';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatSliderModule} from '@angular/material/slider';
+import { ProductDetailsComponent } from './productContainer/product-details/product-details.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     RegisterComponent,
     LoginComponent,
-    BoardUserComponent,
-    BoardAdminComponent,
-    BoardModeratorComponent,
     ProfileComponent,
     HomeComponent,
     TempPageComponent,
     FreshUserRegisterComponent,
     ForgotPasswordComponent,
+    ProductDetailsComponent,
   ],
   imports: [
     BrowserModule,

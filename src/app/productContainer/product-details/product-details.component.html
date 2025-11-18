@@ -1,0 +1,259 @@
+<div class="container mt-4">
+    
+    <div class="brandDesign mb-4 p-1 px-2 " >
+        {{productName}}
+    </div>
+
+
+    <div class="row" *ngIf="productData">
+
+        <!-- Sidebar Thumbnails -->
+        <div class="col-md-1" *ngIf="productData; else loadingTemplate">
+            <div class="d-flex flex-column vertical-thumbnails">
+                <img 
+                    *ngFor="let productImages of productData.productFilesDtos" 
+                    [src]="productImages.pfileUrl" 
+                    class="img-thumbnail mb-2" 
+                    alt="Thumbnail"
+                    (mouseenter)="changeMainImage(productImages.pfileUrl)">
+            </div>
+        </div>
+
+        <ng-template #loadingTemplate>
+            <p>Loading product details...</p>
+          </ng-template>
+
+        <!-- Main Product Image -->
+         
+        <div class="col-md-5 ">
+            <img [src]="mainImage" class="img-fluid border sticky-image mb-2 productImage" alt="Product Image">
+
+            <div class="d-flex horizontal-thumbnails">
+                <span *ngFor="let productFiles of productData.productFilesDtos">
+                    <img *ngIf="productFiles.pFileType === 'IMAGE'" 
+                    [src]="productFiles.pfileUrl" class="border img-thumbnail me-2" width="50px" alt="Color Option">
+                </span>
+            </div> 
+        </div>
+
+        <!-- Product Details -->
+        <div class="col-md-5 mx-3">
+            <p class="text-muted brandName custom-spacing">{{productData.brand}}</p>
+             <p class="custom-spacing productName">{{productData.productName}}</p>
+
+            <div class="px-2 py-1 limitedDealOffer mt-2">
+                <span class="fs12">Limited Deal Offer</span>
+            </div>
+
+           <div class="mt-2">
+            <p class="price-section mb-0">
+                <span class="productPrice"><span class="fs20" >₹</span>{{productData.productPrice}}</span>
+                <span class="productOff mx-3">{{productData.productDiscount}}% Off</span>
+            </p>
+            <span class="productMrp p-0">
+                <del class="custom-del fs14">M.R.P : ₹{{productData.productMrp}}</del>
+            </span>
+           </div>
+
+            <!-- <div *ngIf="productData.rating && productData.reviewCount" class="rating align-items-center">
+                <span class="badge" style="background-color: #26A541;">{{productData.rating}} ★</span>
+                <p class="text-muted mt-1">{{productData.reviewCount}} reviews</p>
+            </div>  -->
+            
+            <div  class="rating align-items-center">
+                <span class="badge" style="background-color: #26A541;">4.3 ★</span>
+                <p class="text-muted mt-1">562 reviews</p>
+            </div>
+
+            <div class="btn-group size-selector-group mt-3" role="group" aria-label="Size Selection">
+                <ng-container *ngFor="let pSizes of productData.productSizesDtos; let i = index">
+                  
+                  <button 
+                    type="button" 
+                    class="btn size-selector-btn" 
+                    (click)="cartService.onSizeChange(pSizes.productSize)" 
+                    [ngClass]="{
+                      'size-selected': selectedSize === pSizes.productSize, 
+                      'size-out-of-stock': pSizes.productInventory === '0'
+                    }"
+                    (click)="selectSize(pSizes.productSize)" >
+                    {{ pSizes.productSize }}
+                  </button>
+              
+                </ng-container>
+              </div>
+
+              <p class="mt-2">
+                Selected Size :
+                <strong> {{(selectedSize)}}</strong>
+              </p>
+              
+
+
+              <ng-container>
+                <div class="mt-4 d-flex gap-2">
+                  
+                  <!-- Conditionally show buttons based on stock availability -->
+                  <ng-container *ngIf="!isOutOfStock">
+
+                    <button type="button" class="btn buyNow btn-lg flex-fill" 
+                            (click)="addToCartBuyNow(productData)">
+                    <i class="bi bi-bag-heart"></i>
+                    BUY NOW
+                    </button>
+
+              
+                    <button type="button" class="btn btn-warning btn-lg flex-fill" 
+                            (click)="cartAddToCart(productData)">
+                    <i class="bi bi-cart4"></i> ADD TO CART
+                    </button>
+                    
+
+                  </ng-container>
+              
+                </div>
+              </ng-container>
+            
+              <!-- <div class="btn-group size-selector-group mt-3" role="group" aria-label="Size Selection">
+                <ng-container *ngFor="let variant of productData.sellerProductVarientResponses; let i = index">
+                  
+                  <button 
+                    type="button" 
+                    class="btn size-selector-btn" 
+                    (click)="cartService.onSizeChange(variant.productLabel)" 
+                    [ngClass]="{
+                      'size-selected': selectedSize === variant.productLabel, 
+                      'size-out-of-stock': variant.productInventory === '0'
+                    }">
+                    {{ variant.productLabel }}
+                  </button>
+              
+                </ng-container>
+              </div> -->
+              
+              <!-- <p class="mt-2">
+                Selected Size :
+                <strong> {{(selectedSize)}}</strong>
+              </p> -->
+              
+              
+              
+
+
+              <!-- ======================================================================================= -->
+
+            
+            
+              
+
+              <!-- <ng-container *ngIf="isOutOfStock" class="mt-3" >
+                <button class="outOfStockbutton">
+                    <span class="moving-text">Product Size Unavailable
+                        <i class="bi bi-exclamation"></i>
+                    </span>
+                  </button>
+              </ng-container> -->
+              
+
+            <!-- <div class="mt-4">
+                <p class="text-dark brandName custom-spacing mb-3">Product Details</p>
+                
+                <div class="row mb-3 mt-1" *ngFor="let pd of productData.productDetailsResponses">
+                    <div class="col-6 col-sm-4  pdh pdKey-custom">{{pd.pdKey}}</div>
+                    <div class="col-6 col-sm-8 pdValues-custom">{{pd.pdValue}}</div>
+                </div>
+            </div> -->
+            
+
+            <hr>
+            <div>
+                <!-- <ul class="list-unstyled" [innerHTML]="productData.description"></ul> -->
+            </div>
+
+
+            <!-- features-container STARTING -->
+            <div class="container">
+                <div class="row features-container">
+                    <div class="col-xl-2 col-lg-3 col-md-2 col-sm-2 col-3 feature-item">
+                        <div class="feature-icon"><i class="bi bi-truck"></i></div>
+                        <p>Free Delivery</p>
+                    </div>
+                    <div class="col-xl-2 col-lg-3 col-md-2 col-sm-2 col-3 feature-item">
+                        <div class="feature-icon"><i class="bi bi-arrow-repeat"></i></div>
+                        <p>7 Days Replacement</p>
+                    </div>
+                    <div class="col-xl-2 col-lg-3 col-md-2 col-sm-2 col-3 feature-item">
+                        <div class="feature-icon"><i class="bi bi-box-seam"></i></div>
+                        <p>Amazon Delivered</p>
+                    </div>
+                    <div class="col-xl-2 col-lg-3 col-md-2 col-sm-2 col-3 feature-item">
+                        <div class="feature-icon"><i class="bi bi-cash-stack"></i></div>
+                        <p>Pay on Delivery</p>
+                    </div>
+                    <div class="col-xl-2 col-lg-3 col-md-2 col-sm-2 col-3 feature-item">
+                        <div class="feature-icon"><i class="bi bi-lock"></i></div>
+                        <p>Secure Transaction</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+
+<!-- ======================================================================================================== -->
+
+<!-- SIMILART PRODUCT SHOWING STARTING -->
+
+<div class="container mt-5">
+    <h5 >Similar Products</h5>
+</div>
+<!-- 
+<div class="container footerDown">
+    <div class="row">
+        <ng-container *ngFor="let data of similarProducts">
+            <div *ngIf="productId !== data.id" 
+                class="col-xl-3 col-lg-3 col-md-4 col-sm-4 col-6 mb-4">
+                
+                <a  [routerLink]="['/pw']" [queryParams]="{ 
+                    cI: data.bornCategoryId,
+                    cN: data.bornCategoryName,
+                    pI: data.id,
+                    pN: data.productName }"
+                    class="card product-card h-100">
+                    
+                    <div *ngIf="data?.productFilesResponses?.length" class="product-image-container">
+                        <img [src]="data.productFilesResponses[0].fileUrl" alt="Product Image" class="product-image img-fluid">
+
+                        <div *ngIf="data.rating && data.reviewCount" class="rating-review">
+                            {{data.rating}} <i class="bi bi-star-fill"></i> | {{data.reviewCount}}
+                        </div>
+
+                        <div class="tag">{{data.materialType}}</div>
+                    </div>
+
+                    <div *ngIf="data?.productFilesResponses?.length" class="card-body p-2">
+                        <p class="product-title">{{ data?.brandField }}</p>
+                        <p class="pdName mb-1">
+                            {{ data?.productName | slice:0:30 }}
+                        </p>
+                        <p class="price-details mb-0">
+                            <span class="actualPrice">Rs.{{ data?.productPrice }}</span>
+                            <span class="mrpPrice mx-1">Rs.{{ data?.productMrp }}</span>
+                            <span class="priceOff mx-1">({{ data?.calculatedDiscount }})</span>
+                        </p>
+                    </div>
+                </a>
+
+            </div>
+        </ng-container>
+    </div>
+</div> -->
+
+
+                
+
+<!-- SIMILART PRODUCT SHOWING ENDING -->
