@@ -28,6 +28,8 @@ import {MatStepperModule} from '@angular/material/stepper';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatSliderModule} from '@angular/material/slider';
 import { ProductDetailsComponent } from './productContainer/product-details/product-details.component';
+import { ManageAddressComponent } from './customerDashboard/manage-address/manage-address.component';
+import { CustomerDashboardComponent } from './customerDashboard/customer-dashboard/customer-dashboard.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +42,8 @@ import { ProductDetailsComponent } from './productContainer/product-details/prod
     FreshUserRegisterComponent,
     ForgotPasswordComponent,
     ProductDetailsComponent,
+    ManageAddressComponent,
+    CustomerDashboardComponent
   ],
   imports: [
     BrowserModule,

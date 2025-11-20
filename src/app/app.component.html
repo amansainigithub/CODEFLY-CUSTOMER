@@ -46,25 +46,6 @@
           <i class="bi bi-cart4"></i>
             cart
           </button> -->
-
-          <button mat-mini-fab color="primary" [matMenuTriggerFor]="cart" aria-label="Example icon button with a menu icon">
-            <i class="bi bi-cart3"></i>
-          </button>
-          <mat-menu  #cart="matMenu">
-            <button mat-menu-item>
-              <mat-icon>dialpad</mat-icon>
-              <span>Redial</span>
-            </button>
-            <button mat-menu-item disabled>
-              <mat-icon>voicemail</mat-icon>
-              <span>Check voice mail</span>
-            </button>
-            <button mat-menu-item>
-              <mat-icon>notifications_off</mat-icon>
-              <span>Disable alerts</span>
-            </button>
-          </mat-menu>
-
           
         </div>
     </nav>
@@ -87,36 +68,100 @@
 
   <nav class="navbar">
     <div class="navbar-logo">
-        <a href="#">
-            <span class="logo-text">Flipkart</span>
-            <small style="color: black;">Explore <span class="plus">Plus</span> ✨</small>
-        </a>
+      <a href="#">
+        <span class="logo-text">Flipkart</span>
+        <small style="color: black;">Explore <span class="plus">Plus</span> ✨</small>
+      </a>
     </div>
     <div class="navbar-search">
-        <input type="text" placeholder="Search for Products, Brands and More">
+      <input type="text" placeholder="Search for Products, Brands and More">
     </div>
     <div class="navbar-menu">
 
-      <button mat-raised-button color="primary" >
-      <i class="bi bi-cart4"></i>
+      <button mat-raised-button color="primary">
+        <i class="bi bi-cart4"></i>
         cart
       </button>
 
-      <button mat-raised-button color="primary"  (click)="logout()">
+      <!-- <button mat-raised-button color="primary" (click)="logout()">
         <i class="bi bi-cart4"></i>
         logout
+      </button> -->
+
+      <button mat-mini-fab color="primary" [matMenuTriggerFor]="profileData" aria-label="Example icon button with a menu icon">
+        <i class="bi bi-person-circle"></i>
       </button>
+      <mat-menu #profileData="matMenu">
+        <!-- DASHBOARD MENU ITEM (routerLink added) -->
+        <button mat-menu-item [routerLink]="'/customer/dashboard'">
+          <mat-icon>dashboard</mat-icon>
+          <span>Dashboard</span>
+        </button>
+
+        <button mat-menu-item (click)="logout()">
+          <mat-icon>lock_open</mat-icon>
+          <span>Logout</span>
+        </button>
+      </mat-menu>
     </div>
-</nav>
-  <div class="container-fluid">
-    <a href="admin" routerLink="admin" class="nav-link">CUSTOMER</a>
-    <router-outlet></router-outlet>
-  </div>
+  </nav>
+
+  <!-- ################################################################################################################# -->
+<!-- Side Navbar Starting -->
+    <div class="container-fluid " *ngIf="homePageFlag">
+      <div class="row">
+    
+        <nav class="col-md-3 col-lg-2 d-md-block bg-light sidebar p-3 rounded-3">
+          <div>
+          
+          
+            <div class="text-center ">
+               <img src="../assets/Product Dummy Images/pp.png" alt="User Avatar" class="rounded-circle" width="80">
+              <h5 class="mt-2 fs15">Amans Rajput</h5>
+            </div>
+    
+            <ul class="nav flex-column mt-3">
+              <li class="nav-item">
+                <a class="nav-link px-4 py-2 rounded d-flex align-items-center" routerLink="/customer/dashboard"
+                  [class.active]="activeTab === '/customer/dashboard'" (click)="setActiveTab('/customer/dashboard')">
+                  <i class="bi bi-speedometer2 me-2"></i> Dashboard
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a class="nav-link px-4 py-2 rounded d-flex align-items-center" routerLink="/customer/shipping-address"
+                  [class.active]="activeTab === '/customer/shipping-address'"
+                  (click)="setActiveTab('/customer/shipping-address')">
+                  <i class="bi bi-box-seam me-2"></i> Shipping Address
+                </a>
+              </li>
+
+              <hr>
+              <li class="nav-item">
+                <a class="nav-link px-4 py-2 rounded d-flex align-items-center" routerLink="#"
+                  [class.active]="activeTab === ''" (click)="logout()">
+                  <i class="bi bi-lock me-2"></i>Logout
+                </a>
+              </li>
+            </ul>
+          </div>
+        </nav>      
+    
+        <div class="col-md-10">
+          <router-outlet></router-outlet>
+        </div>
+      </div>
+    </div>
+    <!-- Side Navbar Ending -->
+
+    <!-- ################################################################################################### -->
+
+    
+    <div class="container-fluid" *ngIf="!homePageFlag">
+      <router-outlet></router-outlet>
+    </div>
+
+
 </div>
 <!-- ======================================================================================================================== -->
-
-
-
-<!-- takes default width of 350px and top-right position   -->
 <ng-toast />  
-<!-- <button type="button" (click)="genToast()" >click</button>-->

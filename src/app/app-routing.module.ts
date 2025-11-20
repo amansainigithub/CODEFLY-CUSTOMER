@@ -8,6 +8,8 @@ import { CustomerGuardService } from './customerGuard/customer-guard.service';
 import { FreshUserRegisterComponent } from './components/fresh-user-register/fresh-user-register.component';
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
 import { ProductDetailsComponent } from './productContainer/product-details/product-details.component';
+import { ManageAddressComponent } from './customerDashboard/manage-address/manage-address.component';
+import { CustomerDashboardComponent } from './customerDashboard/customer-dashboard/customer-dashboard.component';
 
 
 const routes: Routes = [
@@ -25,6 +27,8 @@ const routes: Routes = [
       children: [
                   //CUSTOMER PANEL (Customer Panel)
                   { path: 'shopper', component: HomeComponent},
+                  { path: 'dashboard', component: CustomerDashboardComponent},
+                  { path: 'shipping-address', component: ManageAddressComponent},
                 ],
 }
 
