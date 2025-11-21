@@ -118,6 +118,7 @@ export class ManageAddressComponent {
         this.spinner.hide();
       }
     });
+     this.spinner.hide();
   }
 
 

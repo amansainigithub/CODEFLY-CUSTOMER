@@ -1,3 +1,8 @@
+.container-design {
+    width: 50rem;
+    border-radius: 14px;
+}
+
 .addressCard{
     border-radius:10px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
@@ -24,3 +29,14 @@
     display: inline-block;
     border-radius: 4px;
   }
+
+
+.button-size{
+    height: 25px;
+    font-size: 12px;
+}
+
+.button-icon-size{
+    font-size: 16px;
+}
+
