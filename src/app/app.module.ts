@@ -30,6 +30,7 @@ import {MatSliderModule} from '@angular/material/slider';
 import { ProductDetailsComponent } from './productContainer/product-details/product-details.component';
 import { ManageAddressComponent } from './customerDashboard/manage-address/manage-address.component';
 import { CustomerDashboardComponent } from './customerDashboard/customer-dashboard/customer-dashboard.component';
+import { ShoppingCartComponent } from './customerDashboard/shopping-cart/shopping-cart.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { CustomerDashboardComponent } from './customerDashboard/customer-dashboa
     ForgotPasswordComponent,
     ProductDetailsComponent,
     ManageAddressComponent,
-    CustomerDashboardComponent
+    CustomerDashboardComponent,
+    ShoppingCartComponent
   ],
   imports: [
     BrowserModule,

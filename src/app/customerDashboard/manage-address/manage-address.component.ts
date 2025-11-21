@@ -15,8 +15,6 @@ declare var bootstrap: any; // Import Bootstrap JavaScript
 })
 export class ManageAddressComponent {
 
-
-  
   states: string[] = [
   'Andhra Pradesh',
   'Bihar',
@@ -227,29 +225,5 @@ export class ManageAddressComponent {
       }
     });
   }
-
-// =]==========================================
-
-
-qrCodeUrl: string | null = null;
-  amount: number | null = null;
-
-  generateQRCode() {
-    const vpa = 'amansaini1407-1@okaxis';
-    const name = 'YourBusiness';
-    const amount = 1;
-    const transactionNote = 'Order123';
-
-    this.http.get<any>(`http://localhost:8080/customer/api/v1/addressController/generate-qr?vpa=${vpa}&name=${name}&amount=${amount}&transactionNote=${transactionNote}`)
-      .subscribe(response => {
-
-        console.log(response);
-        
-        this.qrCodeUrl = response.qrCode;
-        this.amount = response.amount;
-      });
-  }
-
-
 
 }

@@ -116,6 +116,10 @@ export class ProductDetailsComponent {
   }
 
   cartAddToCart(productData: any): void{
+    console.log("=========================");
+    
+    console.log(productData);
+    
 
     if(this.selectedSize === '')
       {

@@ -16,10 +16,11 @@ export class CartService {
     private toast: NgToastService,
     private router: Router,
     private _snackBar:MatSnackBar
-  ) {}
+  ) {
+    this.loadCart();  // Load cart when service initializes
+  }
 
   ngOnInit() {
-    this.loadCart();
   }
 
   onSizeChange(selectedSize: string) {
@@ -77,14 +78,14 @@ export class CartService {
         pId: productData.id,
         pName: productData.productName,
         pPrice: productData.productPrice,
-        pBrand: productData.brandField,
+        pBrand: productData.brand,
         pSize: productSize,
         quantity: 1,
         totalPrice: productData.productPrice,
-        pFileUrl: productData.productFilesResponses?.[0]?.fileUrl || '',
-        pColor: productData.colorVariant,
+        pFileUrl: productData.productFilesDtos?.[0]?.pfileUrl || '',
+        pColor: productData.productColor,
         pMrp: productData.productMrp,
-        pCalculatedDiscount: productData.calculatedDiscount,
+        pCalculatedDiscount: productData.productDiscount,
       };
       this.cartItems.push(cartItem);
     }
@@ -136,10 +137,10 @@ export class CartService {
       existingItem.totalPrice = existingItem.pPrice * existingItem.quantity;
     } else {
       const cartItem = {
-        pId: productData.id,
+        pId: productData.productId,
         pName: productData.productName,
         pPrice: productData.productPrice,
-        pBrand: productData.brandField,
+        pBrand: productData.brand,
         pSize: productSize,
         quantity: 1,
         totalPrice: productData.productPrice,

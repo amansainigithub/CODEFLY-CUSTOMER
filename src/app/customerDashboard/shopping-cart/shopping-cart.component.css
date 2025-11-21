@@ -1,0 +1,169 @@
+.cart-item{
+    border-radius: 12px;
+}
+.cart-item img {
+    max-width: 120px;
+    
+}
+
+.pName {
+    font-size: 17px;
+    color: #2e4053;
+}
+
+.instock{
+     background: linear-gradient(to right, #1fc316, #2edc31); /* Yellow gradient */
+    color: rgb(16, 16, 16);
+    border-radius: 4px;
+}
+
+.pfs {
+    font-size: 12px;
+    border-radius: 3px;
+}
+
+.SAndC {
+    font-weight: 500;
+}
+
+.price {
+    font-size: 1.2rem;
+}
+
+.pmrp {
+    text-decoration: line-through;
+    color: #5d6d7e;
+    font-size: 14px;
+}
+
+.running-truck {
+    display: inline-block;
+    animation: moveTruck 1s infinite ease-in-out, colorChange 1s infinite;
+    font-size: 15px;
+}
+
+.discount-badge {
+    background: linear-gradient(to right, #4520da, #1846c3); /* Yellow gradient */
+    color: white;
+    /* font-weight: bold; */
+    font-size: 12px;
+    padding: 5px 13px;
+    display: inline-block;
+    clip-path: polygon(0% 0%, 85% 0%, 100% 50%, 85% 100%, 0% 100%);
+    text-transform: uppercase;
+}
+
+
+
+
+.useShadows {
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease-in-out;
+}
+
+.useShadows:hover {
+    box-shadow: 0 0 20px 5px rgba(0, 0, 0, 0.1);
+}
+
+.product-image{
+    width: 100px;
+    border-radius: 5px;
+}
+
+
+
+/* ==============COUPEN BOX --- OR COL-MD-4=========== */
+
+.pdKeys{
+    font-size: 14px;
+    color: #000000;
+    font-family: sans-serif;
+}
+.coupon-box {
+    border: 1px solid #ddd;
+    padding: 15px;
+    border-radius: 8px;
+    background: #fff;
+}
+.price-box {
+    border: 1px solid #ddd;
+    padding: 15px;
+    border-radius: 8px;
+    background: #fff;
+    margin-top: 15px;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+}
+.apply-btn {
+    border: 1px solid #000;
+    background: #fff;
+    padding: 5px 15px;
+    border-radius: 5px;
+}
+.order-btn {
+    background: #fed90c;
+    color: #0f0f0e;
+    width: 100%;
+    padding: 12px;
+    border-radius: 5px;
+}
+.savings {
+    background: #ecf9ec;
+    padding: 8px;
+    border-radius: 5px;
+    text-align: center;
+    color: #28a745;
+}
+
+
+@keyframes moveTruck {
+    0% {
+        transform: translateX(0);
+    }
+
+    50% {
+        transform: translateX(10px);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}
+
+@keyframes colorChange {
+    0% {
+        color: #d35400;
+    }
+
+    /* Orange */
+    33% {
+        color: #27ae60;
+    }
+
+    /* Green */
+    66% {
+        color: #2980b9;
+    }
+
+    /* Blue */
+    100% {
+        color: #d35400;
+    }
+
+    /* Back to Orange */
+}
+
+
+
+
+
+.cartEmpty{
+     font-family: 'Helvetica', sans-serif;
+}
+.footerdown{
+    margin-bottom: 150px;
+}
+
+
+
+
+
