@@ -1,0 +1,276 @@
+/* Container Width */
+.custom-container{
+  max-width: 1200px;
+}
+.footerDown{
+  margin-bottom: 200px;
+}
+
+
+/* 
+<!-- ########################################################################################################### -->
+<!-- ########################################################################################################### --> */
+
+/* STEPPER FIRST (1) STARTING*/
+.addressCard{
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+
+.selected-card {
+    background-color: #e3f2fd; /* Light blue background */
+    border: 2px solid #712CF9; /* Highlight border */
+  }
+  
+  input[type="radio"] {
+    transform: scale(1.5); /* Increase radio button size */
+    margin-right: 5px; /* Add spacing */
+  }
+
+.savings {
+  background: #d4dbff;
+  padding: 8px;
+  border-radius: 5px;
+  text-align: center;
+  color: #556158;
+}
+
+.addAddress{
+  background-color: #eafaf1;
+  font-size: 12px;
+  height: 30px; 
+  width: 25%;
+  color: black;
+}
+
+.deliveryAddress,.productDetails {
+  font-size: 15px; /* Medium-large size */
+  font-weight: 500; /* Semi-bold */
+  color: #6D2AEF; /* Attractive blue color */
+  text-align: center; /* Centered text */
+  padding: 10px;
+  border-bottom: 2px solid #007bff; /* Underline effect */
+  display: inline-block;
+  margin-bottom: 1rem;
+}
+
+.addressDefault{
+  background-color: #f3e912;
+  font-size: 12px;
+  height: 30px; 
+  min-width: 80px;
+  color: black;
+}
+
+.editBtn{
+  background-color: #712CF9;
+  font-size: 12px;
+  height: 30px; 
+  min-width: 80px;
+  color: white;
+}
+
+.continueToPayment{
+  background-color: #712CF9;
+  color: white;
+  height: 55px;
+}
+
+/* STEPPER FIRST (1) ENDING....*/
+
+
+/* 
+<!-- ########################################################################################################### -->
+<!-- ########################################################################################################### --> */
+
+
+
+/*STEPPER SECOND (2) STARTING.... */
+
+.select-paymentMode{
+  background-color: #dbcffe;
+  padding: 6px;
+  border-radius: 4px;
+  display: inline-block;
+}
+
+.payment-method {
+  border: 2px solid #ddd;
+  border-radius: 10px;
+  cursor: pointer;
+}
+.payment-method.active {
+  border-color: #34495e;
+  background-color: #e3d0ff;
+}
+.order-summary {
+  border-left: 2px solid #ddd;
+  padding-left: 20px;
+}
+
+.paymentBoxF{
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.payOnlineButton{
+  background-color: #712CF9;
+  color: white;
+}
+
+.payCodButton{
+   background-color: #7ff32c;
+  color: white;
+}
+
+/* UPI ICONS IMAGE  */
+.upi-icons img {
+  width: 30px;
+  margin: 10px;
+  height: 25px;
+}
+
+/* STEPPER SECOND (2) ENDING.... */
+
+
+/* 
+<!-- ########################################################################################################### -->
+<!-- ########################################################################################################### --> 
+*/
+
+  /* PAY COD AND ONLICNE STARTING*/
+  .modal-dialog {
+    max-width: 800px; 
+  }
+
+  .model-content-address{
+    border-radius: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border: none;
+    padding: 25px;
+    height: 800px;
+  }
+
+  .model-dialog-cod{
+        max-width: 600px; 
+  }
+
+  .model-content-cod {
+    border-radius: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border: none;
+    padding: 25px;
+    height: 400px; 
+  }
+  
+  .modal-body {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    margin-top: 5px;
+    align-items: center;
+  }
+  .modal-body h4 {
+    font-weight: bold;
+    color: #712CF9;
+  }
+  
+  .modal-body .s101 {
+    color: #666;
+    font-size: 16px;
+  }
+  
+  
+  .processArea{
+    margin-top: 50px;
+  }
+  
+  .successArea{
+    margin-top: -25px;
+  }
+  
+  .modal-body .rocketIcon {
+    width: 90px;
+    margin-bottom: 15px;
+    animation: rotateAndMoveUp 6s ease-in-out forwards;
+  }
+  
+  .csBtn{
+    background-color: #712CF9;
+    color: white;
+  }
+
+  .gtoBtn{
+    background-color: #f3e912;
+    color: black;
+  }
+
+.modelClose{
+  background-color: #ffda47	;
+  font-size: 12px;
+  height: 30px; 
+  min-width: 80px;
+  color: rgb(18, 17, 27);
+}
+
+ @keyframes rotateAndMoveUp {
+    0% {
+      transform: translate(0, 0) rotate(0deg);
+    }
+    50% {
+      transform: translate(50px, -50px) rotate(1200deg); /* Rotate Faster */
+    }
+    100% {
+      transform: translate(150px, -120px) rotate(1080deg); /* Double Speed Rotation */
+      opacity: 0;
+    }
+  }
+  /* PAY COD AND ONLICNE STARTING*/
+
+/* 
+<!-- ########################################################################################################### -->
+<!-- ########################################################################################################### --> 
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

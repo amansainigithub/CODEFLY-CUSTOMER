@@ -75,7 +75,7 @@ export class CartService {
 
     } else {
       const cartItem = {
-        pId: productData.id,
+        pId: productData.productId,
         pName: productData.productName,
         pPrice: productData.productPrice,
         pBrand: productData.brand,

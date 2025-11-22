@@ -13,6 +13,8 @@ import { Router } from '@angular/router';
 })
 export class ShoppingCartComponent {
 
+  quantityOptions: number[] = Array.from({ length: 10 }, (_, i) => i + 1);
+
   
   constructor(
     private spinner: NgxSpinnerService,
@@ -25,24 +27,6 @@ export class ShoppingCartComponent {
   ngAfterViewInit() {
     this.runCelebration();
   }
-
-  quantityOptions: number[] = Array.from({ length: 10 }, (_, i) => i + 1);
-
-
-  proceedToPay(){
-
-    const user = this.tokenStorageService.getUser();
-    if (!user || Object.keys(user).length === 0) {
-      console.log("User is null, undefined, or an empty object");
-      this.router.navigateByUrl('/login');
-      return;
-    }else{
-      this.router.navigateByUrl('pay/proceedToPay');
-    }
-
-  }
-
-
 
 
 
@@ -57,5 +41,23 @@ runCelebration() {
     }, 700);
   }
 }
+
+  proceedToPay(){
+    const user = this.tokenStorageService.getUser();
+    if (!user || Object.keys(user).length === 0) {
+      console.log("User is null, undefined, or an empty object");
+      this.router.navigateByUrl('/login');
+      return;
+    }else{
+      this.router.navigateByUrl('pay/paymentCheckout');
+    }
+
+  }
+
+
+
+
+
+
 
 }

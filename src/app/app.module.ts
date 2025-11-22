@@ -31,7 +31,8 @@ import { ProductDetailsComponent } from './productContainer/product-details/prod
 import { ManageAddressComponent } from './customerDashboard/manage-address/manage-address.component';
 import { CustomerDashboardComponent } from './customerDashboard/customer-dashboard/customer-dashboard.component';
 import { ShoppingCartComponent } from './productContainer/shopping-cart/shopping-cart.component';
-
+import { PaymentCheckoutComponent } from './productContainer/payment-checkout/payment-checkout.component';
+import {MatTooltipModule} from '@angular/material/tooltip';
 @NgModule({
   declarations: [
     AppComponent,
@@ -45,7 +46,8 @@ import { ShoppingCartComponent } from './productContainer/shopping-cart/shopping
     ProductDetailsComponent,
     ManageAddressComponent,
     CustomerDashboardComponent,
-    ShoppingCartComponent
+    ShoppingCartComponent,
+    PaymentCheckoutComponent
   ],
   imports: [
     BrowserModule,
@@ -65,7 +67,8 @@ import { ShoppingCartComponent } from './productContainer/shopping-cart/shopping
     MatIconModule,
     MatStepperModule,
     MatExpansionModule,
-    MatSliderModule
+    MatSliderModule,
+    MatTooltipModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [authInterceptorProviders, provideAnimationsAsync()],
