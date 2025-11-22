@@ -93,8 +93,8 @@ export class CartService {
     this.saveCart();
     this.toast.success({
       detail: 'Success',
-      summary: 'Item Added to Cart',
-      position: 'bottomRight',
+      summary: 'Product Added to Cart',
+      position: 'topRight',
       duration: 2000,
     });
   }
@@ -155,8 +155,8 @@ export class CartService {
     this.saveCart();
     this.toast.success({
       detail: 'Success',
-      summary: 'Item Added to Cart',
-      position: 'bottomRight',
+      summary: 'Product Added to Cart',
+      position: 'topRight',
       duration: 2000,
     });
   

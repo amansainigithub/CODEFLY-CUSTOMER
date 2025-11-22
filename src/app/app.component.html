@@ -1,61 +1,49 @@
-<ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" 
-  size = "small" 
-  color = "#fff" 
-  type = "ball-clip-rotate" 
-  [fullScreen] = "true">
-  <p style="color: white" > 
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="small" color="#fff" type="ball-clip-rotate" [fullScreen]="true">
+  <p style="color: white">
     Loading... </p>
 </ngx-spinner>
 
 
 
 
-<!-- ======================================================================================================================== -->
-<div id="app" *ngIf="!isLoggedIn" >
+<!-- ################################################################################################################ -->
+<!-- ################################################################################################################ -->
 
-      <nav class="navbar">
-        <div class="navbar-logo">
-            <a href="#">
-                <span class="logo-text">Shopper</span>
-                <small style="color: black;">Explore <span class="plus">Plus</span> ✨</small>
-            </a>
-        </div>
-        <div class="navbar-search">
-            <input type="text" placeholder="Search for Products, Brands and More">
-        </div>
-        <div class="navbar-menu">
+<div id="app" *ngIf="!isLoggedIn">
 
-          <a href="/login" class="nav-link" routerLink="login"
-             mat-raised-button color="primary">
-              <i class="bi bi-box-arrow-in-right "></i>
-            Login
-          </a>
-          <!-- <mat-menu #login="matMenu">
-            <button mat-menu-item>Item 1</button>
-            <button mat-menu-item>Item 2</button>
-          </mat-menu> -->
+  <nav class="navbar">
+    <div class="navbar-logo">
+      <a href="#">
+        <span class="logo-text">Shopper</span>
+        <small style="color: black;">Explore <span class="plus">Plus</span> ✨</small>
+      </a>
+    </div>
+    <div class="navbar-search">
+      <input type="text" placeholder="Search for Products, Brands and More">
+    </div>
+    <div class="navbar-menu">
+
+      <a href="/login" class="nav-link" routerLink="login" mat-raised-button color="primary">
+        <i class="bi bi-box-arrow-in-right "></i>
+        Login
+      </a>
 
 
-          <a href="/register" class="nav-link" routerLink="register"
-             mat-raised-button color="primary" >
-             <i class="bi bi-person-plus px-2"></i>
-              create Account
-          </a>
+      <a href="/register" class="nav-link" routerLink="register" mat-raised-button color="primary">
+        <i class="bi bi-person-plus px-2"></i>
+        create Account
+      </a>
 
-          <!-- <button mat-raised-button color="primary" >
-          <i class="bi bi-cart4"></i>
-            cart
-          </button> -->
-          
-        </div>
-    </nav>
+    </div>
+  </nav>
 
   <div class="container-fluid">
 
     <router-outlet></router-outlet>
   </div>
 </div>
-<!-- ======================================================================================================================== -->
+<!-- ################################################################################################################ -->
+<!-- ################################################################################################################ -->
 
 
 
@@ -63,7 +51,11 @@
 
 
 
-<!-- ======================================================================================================================== -->
+
+
+<!-- #########################################  USER LOGIN STARTING  #################################################### -->
+<!-- ################################################################################################################ -->
+
 <div id="app" *ngIf="isLoggedIn">
 
   <nav class="navbar">
@@ -78,19 +70,16 @@
     </div>
     <div class="navbar-menu">
 
-      <button mat-raised-button color="primary" [routerLink]="['/shopping-cart']">
+    <button mat-raised-button color="primary" [routerLink]="['/shopping-cart']">
         <i class="bi bi-cart4"></i>
-        {{ cartService.getCartLength() }}
-        Cart
-      </button>
+        <span *ngIf="cartService.getCartLength() > 0">
+          {{ cartService.getCartLength() }}
+        </span>
+    </button>
 
 
-      <!-- <button mat-raised-button color="primary" (click)="logout()">
-        <i class="bi bi-cart4"></i>
-        logout
-      </button> -->
-
-      <button mat-mini-fab color="primary" [matMenuTriggerFor]="profileData" aria-label="Example icon button with a menu icon">
+      <button mat-mini-fab color="primary" [matMenuTriggerFor]="profileData"
+        aria-label="Example icon button with a menu icon">
         <i class="bi bi-person-circle"></i>
       </button>
       <mat-menu #profileData="matMenu">
@@ -108,62 +97,63 @@
     </div>
   </nav>
 
-  <!-- ################################################################################################################# -->
-<!-- Side Navbar Starting -->
-    <div class="container-fluid " *ngIf="homePageFlag">
-      <div class="row">
-    
-        <nav class="col-md-3 col-lg-2 d-md-block bg-light sidebar p-3 rounded-3">
-          <div>
-          
-          
-            <div class="text-center ">
-               <img src="../assets/Product Dummy Images/pp.png" alt="User Avatar" class="rounded-circle" width="80">
-              <h5 class="mt-2 fs15">Amans Rajput</h5>
-            </div>
-    
-            <ul class="nav flex-column mt-3 fs15">
-              <li class="nav-item">
-                <a class="nav-link px-4 py-2 rounded d-flex align-items-center" routerLink="/customer/dashboard"
-                  [class.active]="activeTab === '/customer/dashboard'" (click)="setActiveTab('/customer/dashboard')">
-                  <i class="bi bi-speedometer2 me-2"></i> Dashboard
-                </a>
-              </li>
+  <!-- ================================================================================================================= -->
+  <!-- Side Navbar Starting -->
+  <div class="container-fluid " *ngIf="homePageFlag">
+    <div class="row">
 
-              <li class="nav-item">
-                <a class="nav-link px-4 py-2 rounded d-flex align-items-center" routerLink="/customer/shipping-address"
-                  [class.active]="activeTab === '/customer/shipping-address'"
-                  (click)="setActiveTab('/customer/shipping-address')">
-                  <i class="bi bi-box-seam me-2"></i> Shipping Address
-                </a>
-              </li>
+      <nav class="col-md-3 col-lg-2 d-md-block bg-light sidebar p-3 rounded-3">
+        <div>
 
-              <hr>
-              <li class="nav-item">
-                <a class="nav-link px-4 py-2 rounded d-flex align-items-center" routerLink="#"
-                  [class.active]="activeTab === ''" (click)="logout()">
-                  <i class="bi bi-lock me-2"></i>Logout
-                </a>
-              </li>
-            </ul>
+
+          <div class="text-center ">
+            <img src="../assets/Product Dummy Images/pp.png" alt="User Avatar" class="rounded-circle" width="80">
+            <h5 class="mt-2 fs15">Amans Rajput</h5>
           </div>
-        </nav>      
-    
-        <div class="col-md-10">
-          <router-outlet></router-outlet>
+
+          <ul class="nav flex-column mt-3 fs15">
+            <li class="nav-item">
+              <a class="nav-link px-4 py-2 rounded d-flex align-items-center" routerLink="/customer/dashboard"
+                [class.active]="activeTab === '/customer/dashboard'" (click)="setActiveTab('/customer/dashboard')">
+                <i class="bi bi-speedometer2 me-2"></i> Dashboard
+              </a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link px-4 py-2 rounded d-flex align-items-center" routerLink="/customer/shipping-address"
+                [class.active]="activeTab === '/customer/shipping-address'"
+                (click)="setActiveTab('/customer/shipping-address')">
+                <i class="bi bi-box-seam me-2"></i> Shipping Address
+              </a>
+            </li>
+
+            <hr>
+            <li class="nav-item">
+              <a class="nav-link px-4 py-2 rounded d-flex align-items-center" routerLink="#"
+                [class.active]="activeTab === ''" (click)="logout()">
+                <i class="bi bi-lock me-2"></i>Logout
+              </a>
+            </li>
+          </ul>
         </div>
+      </nav>
+
+      <div class="col-md-10">
+        <router-outlet></router-outlet>
       </div>
     </div>
-    <!-- Side Navbar Ending -->
+  </div>
+  <!-- Side Navbar Ending -->
 
-    <!-- ################################################################################################### -->
+  <!-- ============================================================================================================== -->
 
-    
-    <div class="container-fluid" *ngIf="!homePageFlag">
-      <router-outlet></router-outlet>
-    </div>
+  <div class="container-fluid" *ngIf="!homePageFlag">
+    <router-outlet></router-outlet>
+  </div>
 
 
 </div>
-<!-- ======================================================================================================================== -->
-<ng-toast />  
+<!-- ################################################################################################################ -->
+ <!-- ########################################## USER LOGIN ENDING ############################################## -->
+
+<ng-toast />
