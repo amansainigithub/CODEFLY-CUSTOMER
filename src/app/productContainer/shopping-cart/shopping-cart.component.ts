@@ -1,11 +1,10 @@
 import { Component } from '@angular/core';
+import confetti from 'canvas-confetti';
 import { NgToastService } from 'ng-angular-popup';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { CartService } from '../../_services/cartServices/cart.service';
 import { TokenStorageService } from '../../_services/token-storage.service';
 import { Router } from '@angular/router';
-import confetti from 'canvas-confetti';
-
 
 @Component({
   selector: 'app-shopping-cart',
@@ -14,6 +13,7 @@ import confetti from 'canvas-confetti';
 })
 export class ShoppingCartComponent {
 
+  
   constructor(
     private spinner: NgxSpinnerService,
     private toast: NgToastService,
@@ -57,13 +57,5 @@ runCelebration() {
     }, 700);
   }
 }
-
-
-
-
-
-
-
-
 
 }

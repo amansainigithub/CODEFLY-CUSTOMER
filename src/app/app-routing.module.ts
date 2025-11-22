@@ -10,7 +10,7 @@ import { ForgotPasswordComponent } from './components/forgot-password/forgot-pas
 import { ProductDetailsComponent } from './productContainer/product-details/product-details.component';
 import { ManageAddressComponent } from './customerDashboard/manage-address/manage-address.component';
 import { CustomerDashboardComponent } from './customerDashboard/customer-dashboard/customer-dashboard.component';
-import { ShoppingCartComponent } from './customerDashboard/shopping-cart/shopping-cart.component';
+import { ShoppingCartComponent } from './productContainer/shopping-cart/shopping-cart.component';
 
 
 const routes: Routes = [
