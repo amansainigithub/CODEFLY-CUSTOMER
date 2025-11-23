@@ -1,10 +1,13 @@
+<!--LOADER STARTING -->
 <div [class.blur-screen]="isLoading">
 
+    
+<!-- ############################################################################################################## -->
     <!--########## PRODUCT DETAILS STARTING ##########-->
     <div class="container mt-4">
 
         <div class="brandDesign mb-4 p-1 px-2 ">
-            {{productName}}
+            {{productBrand}}
         </div>
 
         <div class="row" *ngIf="productData">
@@ -74,7 +77,7 @@
                                        'size-out-of-stock': pSizes.productInventory === '0' }" 
                                        (click)="selectSize(pSizes.productSize , pSizes)">
                             <span class="fs14">{{ pSizes.productSize }}</span>
-                            <span class="fs11 mx-1" style="background-color: #e3e4f1;border-radius: 4px;padding: 5px;">
+                            <span class="fs11 mx-1 sizePrice">
                                 ₹{{ pSizes.productPrice }}
                             </span>
                         </button>
@@ -144,9 +147,6 @@
         </div>
     </div>
 <!--########## PRODUCT DETAILS ENDING... ##########-->
-
-
-<!-- ############################################################################################################## -->
 <!-- ############################################################################################################## -->
 
 
@@ -154,6 +154,22 @@
 </div>
 
 <!-- Loader Overlay -->
-<div class="overlay-loader" *ngIf="isLoading">
+<div class="overlay-loader " *ngIf="isLoading">
     <div class="spinner-border" role="status"></div>
 </div>
+<!-- ############################################################################################################## -->
+<!--LOADER FINISH -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+

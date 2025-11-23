@@ -4,6 +4,7 @@ import { CartService } from '../../_services/cartServices/cart.service';
 import { NgToastService } from 'ng-angular-popup';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ProductDetailsService } from '../../_services/productContainerServices/productDetailsServices/product-details.service';
+import { ToastManagerService } from '../../_services/toastMangerService/toast-manager.service';
 
 @Component({
   selector: 'app-product-details',
@@ -13,6 +14,7 @@ import { ProductDetailsService } from '../../_services/productContainerServices/
 export class ProductDetailsComponent {
   productId: any;
   productName: any;
+  productBrand: any;
   productData: any;
   mainImage: any;
   productPrice: any;
@@ -27,16 +29,16 @@ export class ProductDetailsComponent {
     public cartService: CartService,
     private ProductDetailsService: ProductDetailsService,
     private toast: NgToastService,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private toastManager: ToastManagerService
   ) {}
 
   ngOnInit(): void {
-    const productId = this.route.snapshot.queryParamMap.get('productId');
-    const pN = this.route.snapshot.queryParamMap.get('pN');
-    const brand = this.route.snapshot.queryParamMap.get('brand');
-    const price = this.route.snapshot.queryParamMap.get('price');
-    const mrp = this.route.snapshot.queryParamMap.get('mrp');
-
+    // const productId = this.route.snapshot.queryParamMap.get('productId');
+    // const pN = this.route.snapshot.queryParamMap.get('pN');
+    // const brand = this.route.snapshot.queryParamMap.get('brand');
+    // const price = this.route.snapshot.queryParamMap.get('price');
+    // const mrp = this.route.snapshot.queryParamMap.get('mrp');
     // console.log("Product ID:", productId);
     // console.log("Product Name:", pN);
     // console.log("Brand:", brand);
@@ -45,6 +47,7 @@ export class ProductDetailsComponent {
 
     this.productId = this.route.snapshot.queryParamMap.get('productId');
     this.productName = this.route.snapshot.queryParamMap.get('pN');
+    this.productBrand = this.route.snapshot.queryParamMap.get('brand');
 
     this.getProductDetails();
   }
@@ -126,19 +129,8 @@ export class ProductDetailsComponent {
       this.productDiscount = productSizes.productDiscount;
 
       this.isLoading = false; // blur + loader OFF
-    }, 2000); // <<< 3 seconds delay
+    }, 1500); // <<< 3 seconds delay
   }
-
-
-
-
-
-
-
-
-
-
-
 
   
 }

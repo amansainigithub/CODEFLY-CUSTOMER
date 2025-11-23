@@ -33,6 +33,7 @@ import { CustomerDashboardComponent } from './customerDashboard/customer-dashboa
 import { ShoppingCartComponent } from './productContainer/shopping-cart/shopping-cart.component';
 import { PaymentCheckoutComponent } from './productContainer/payment-checkout/payment-checkout.component';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import { ToastManagerComponent } from './components/toastManager/toast-manager/toast-manager.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -47,7 +48,8 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     ManageAddressComponent,
     CustomerDashboardComponent,
     ShoppingCartComponent,
-    PaymentCheckoutComponent
+    PaymentCheckoutComponent,
+    ToastManagerComponent
   ],
   imports: [
     BrowserModule,
