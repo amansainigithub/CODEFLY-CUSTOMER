@@ -418,3 +418,53 @@ body {
   .footerDown{
     margin-bottom: 150px;
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  /* BLUR SCREEN STARTING */
+
+  .blur-screen {
+  filter: blur(5px);
+  pointer-events: none; /* user na kare tab tak */
+  transition: 0.3s ease-in-out;
+}
+
+.overlay-loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.6);
+  z-index: 10000;
+}
+
+.spinner-border {
+  width: 4rem;
+  height: 4rem;
+}

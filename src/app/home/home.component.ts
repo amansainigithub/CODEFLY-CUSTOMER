@@ -1,5 +1,4 @@
 import { Component, OnInit, signal } from '@angular/core';
-import { UserService } from '../_services/user.service';
 import { NgToastService } from 'ng-angular-popup';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { HomePageService } from '../_services/homePageService/homePage/home-page.service';
@@ -31,9 +30,10 @@ export class HomeComponent implements OnInit {
     this.spinner.show();
     this.homePageService.getHomePage().subscribe({
       next: (res: any) => {
+         // console.log(res);
         this.sliderData = res.data.sliderDtoList;
         this.productData = res.data.productDetailsList
-        console.log(res);
+       
         this.spinner.hide();
       },
       error: (err: any) => {
