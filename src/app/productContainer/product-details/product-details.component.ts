@@ -115,9 +115,8 @@ export class ProductDetailsComponent {
 
   }
 
-  cartAddToCart(productData: any): void{
+  productAddToCart(productData: any): void{
     console.log("=========================");
-    
     console.log(productData);
     
 

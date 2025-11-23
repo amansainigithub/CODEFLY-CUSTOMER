@@ -33,71 +33,95 @@ export class CartService {
 
   addToCart(productData: any): void {
 
-    if(this.cartItems.length >= 50)
-    {
-        this._snackBar.open('No more items can be added !!' , 'Close', {
-          duration: 2000,
-          horizontalPosition: 'right',
-          verticalPosition: 'top',
-        });
-        return;
-    }
+  if (this.cartItems.length >= 50) {
+    this._snackBar.open('No more items can be added !!', 'Close', {
+      duration: 2000,
+      horizontalPosition: 'right',
+      verticalPosition: 'top',
+    });
+    return;
+  }
 
-    if (!this.selectedSize) {
+  if (!this.selectedSize) {
+    this.toast.warning({
+      detail: 'Hey,',
+      summary: 'Please Select Size.',
+      position: 'topRight',
+      duration: 2000,
+    });
+    return;
+  }
+
+  const productSize = this.selectedSize;
+  const productId = productData.productId;
+
+  // 🔥 Get Price, MRP from productSizesDtos based on selected size
+  const sizeData = productData.productSizesDtos.find(
+    (size: any) => size.productSize === productSize
+  );
+
+  if (!sizeData) {
+    this.toast.warning({
+      detail: 'Error',
+      summary: 'Invalid size selected',
+      position: 'topRight',
+      duration: 2000,
+    });
+    return;
+  }
+
+  const price = Number(sizeData.productPrice);
+  const mrp = Number(sizeData.productMrp);
+  const discount = Number(((mrp - price) / mrp) * 100).toFixed(2);
+
+  // 🔍 If item already in cart → update quantity
+  const existingItem = this.cartItems.find(
+    (item) => item.pId === productId && item.pSize === productSize
+  );
+
+  if (existingItem) {
+    if (existingItem.quantity >= 10) {
       this.toast.warning({
-        detail: 'Hey,',
-        summary: 'Please Select Size.',
+        detail: 'Cart Items',
+        summary: 'You can’t add more than 10 quantities of same product.',
         position: 'topRight',
         duration: 2000,
       });
       return;
     }
-  
-    const productSize = this.selectedSize;
-    const productId = productData.id;
-  
-    const existingItem = this.cartItems.find(
-      (item) => item.pId === productId && item.pSize === productSize
-    );
-  
-    if (existingItem) {
-      if (existingItem.quantity >= 10) {
-        this.toast.warning({
-          detail: 'Cart Items',
-          summary: 'You cant add more than 10 quantities of the same product.',
-          position: 'topRight',
-          duration: 2000,
-        });
-        return;
-      }
-      existingItem.quantity = Number(existingItem.quantity) + 1;
-      existingItem.totalPrice = Number(existingItem.pPrice) * Number(existingItem.quantity);
 
-    } else {
-      const cartItem = {
-        pId: productData.productId,
-        pName: productData.productName,
-        pPrice: productData.productPrice,
-        pBrand: productData.brand,
-        pSize: productSize,
-        quantity: 1,
-        totalPrice: productData.productPrice,
-        pFileUrl: productData.productFilesDtos?.[0]?.pfileUrl || '',
-        pColor: productData.productColor,
-        pMrp: productData.productMrp,
-        pCalculatedDiscount: productData.productDiscount,
-      };
-      this.cartItems.push(cartItem);
-    }
-  
-    this.saveCart();
-    this.toast.success({
-      detail: 'Success',
-      summary: 'Product Added to Cart',
-      position: 'topRight',
-      duration: 2000,
-    });
+    existingItem.quantity++;
+    existingItem.totalPrice = existingItem.quantity * price;
+
+  } else {
+    // 🛍️ Create new Cart Item
+    const cartItem = {
+      pId: productData.productId,
+      pName: productData.productName,
+      pPrice: price,
+      pBrand: productData.brand,
+      pSize: productSize,
+      quantity: 1,
+      totalPrice: price,
+      pFileUrl: productData.productFilesDtos?.[0]?.pfileUrl || '',
+      pColor: productData.productColor,
+      pMrp: mrp,
+      pCalculatedDiscount: discount,
+    };
+
+    this.cartItems.push(cartItem);
   }
+
+  this.saveCart();
+
+  this.toast.success({
+    detail: 'Success',
+    summary: 'Product Added to Cart',
+    position: 'topRight',
+    duration: 2000,
+  });
+}
+
   
 
   buyNow(productData: any): void {
