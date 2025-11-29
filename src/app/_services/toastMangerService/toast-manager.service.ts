@@ -6,22 +6,31 @@ import { ToastManagerComponent } from '../../components/toastManager/toast-manag
 })
 export class ToastManagerService {
 
-    private toastComp!: ToastManagerComponent;
+  private toastComp!: ToastManagerComponent;
 
-// Register toast component globally
-register(toastComp: ToastManagerComponent) {
-  this.toastComp = toastComp;
-}
+  register(toastComp: ToastManagerComponent) {
+    this.toastComp = toastComp;
+  }
 
-// Show toast with dynamic values
-show(severity: 'success' | 'error' | 'warn' | 'info' | 'secondary' | 'contrast',
-  summary: string,
-  detail: string,
-  duration?: number
-) {
-  if (!this.toastComp) return;
+  show(
+    severity: 'success' | 'error' | 'warn' | 'info' | 'secondary' | 'contrast',
+    summary: string,
+    detail: string,
+    position:
+      'toast-top-left' |
+      'toast-top-center' |
+      'toast-top-right' |
+      'toast-bottom-left' |
+      'toast-bottom-center' |
+      'toast-bottom-right' = 'toast-top-right',
+      duration: number = 3000,
+  ) {
+    if (!this.toastComp) return;
 
-  this.toastComp.showToast({severity,summary, detail, duration});
-}
+    // Dynamic position set
+    this.toastComp.setPosition(position);
 
+    // Toast call
+    this.toastComp.showToast({ severity, summary, detail, duration });
+  }
 }

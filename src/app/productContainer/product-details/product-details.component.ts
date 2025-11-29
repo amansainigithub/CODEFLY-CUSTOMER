@@ -54,10 +54,7 @@ export class ProductDetailsComponent {
 
   getProductDetails() {
     this.spinner.show();
-    this.ProductDetailsService.getProductDetails(
-      this.productId,
-      this.productName
-    ).subscribe({
+    this.ProductDetailsService.getProductDetails( this.productId,  this.productName).subscribe({
       next: (res: any) => {
         console.log(res);
         this.productData = res.data.pw;
@@ -129,7 +126,7 @@ export class ProductDetailsComponent {
       this.productDiscount = productSizes.productDiscount;
 
       this.isLoading = false; // blur + loader OFF
-    }, 1500); // <<< 3 seconds delay
+    }, 700); // <<< 5M seconds delay
   }
 
   

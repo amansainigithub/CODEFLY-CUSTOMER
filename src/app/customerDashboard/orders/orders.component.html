@@ -1,0 +1,41 @@
+<div class="container mt-4 px-5">
+
+    <div class="orders-heading">Orders</div>
+
+<table class="table table-bordered align-middle order-table text-center">
+    <thead class="table-light">
+        <tr>
+            <th>S.No</th>
+            <th>Image</th>
+            <th>Product Name</th>
+            <th>Order No.</th>
+            <th>Size</th>
+            <th>Qty</th>        
+            <th>Price</th>
+            
+        </tr>
+    </thead>
+
+    <tbody>
+        <tr *ngFor="let item of orderItems let i = index">
+            <td>{{i + 1}}</td>
+            <td  style="max-width: 40px;" class="text-center">
+                
+                <a [routerLink]="['/pd']" [queryParams]="{productId: item.productId, pN: item.productName,
+                    brand:item.productBrand , price:item.productPrice , mrp:item.productMrp }">
+                    <img [src]="item.fileUrl" class="order-img" />
+                </a>
+            </td>
+            <!-- [routerLink]="['/pd']" [queryParams]="{productId: data.productId, pN: data.productName,
+                brand:data.brand , price:data.price , mrp:data.mrp }" -->
+
+            <td style="max-width: 150px; text-align: left !important;">{{ item.productName }}</td> 
+            <td>{{ item.orderNoPerItem }}</td> 
+            <td>{{ item.productSize }}</td>
+             <td>{{ item.quantity }}</td>         
+            <td>₹{{ item.productPrice }}</td>
+        </tr>
+    </tbody>
+</table>
+
+</div>

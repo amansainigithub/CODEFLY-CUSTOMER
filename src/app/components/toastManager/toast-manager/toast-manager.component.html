@@ -1,29 +1,22 @@
-<div class="toast-container">
-  <div *ngFor="let toast of toasts"
-       class="custom-toast"
-       [ngClass]="[
-        'toast-' + toast.severity,
-        toast.closing ? 'closing' : ''
-       ]">
-
-    <!-- Left Icon -->
-    <i class="bi"
-       [ngClass]="{
-        'bi-check-circle': toast.severity === 'success',
-        'bi-x-circle': toast.severity === 'error',
-        'bi-exclamation-triangle': toast.severity === 'warn',
-        'bi-info-circle': toast.severity === 'info',
-        'bi-dot': toast.severity === 'secondary',
-        'bi-lightbulb': toast.severity === 'contrast'
-       }"></i>
+<div class="toast-container" [ngClass]="position">
+  <div 
+    *ngFor="let t of toasts"
+    class="custom-toast toast-{{t.severity}}"
+    [class.closing]="t.closing"
+    (click)="removeToast(t)"
+  >
+    <i class="bi" [ngClass]="{
+      'bi-check-circle-fill': t.severity === 'success',
+      'bi-x-circle-fill': t.severity === 'error',
+      'bi-exclamation-circle-fill': t.severity === 'warn',
+      'bi-info-circle-fill': t.severity === 'info'
+    }"></i>
 
     <div class="toast-content">
-      <div class="title">{{toast.summary}}</div>
-      <div class="message">{{toast.detail}}</div>
+      <div class="title">{{ t.summary }}</div>
+      <div class="message">{{ t.detail }}</div>
     </div>
 
-    <!-- Close Button -->
-    <i class="bi bi-x-lg close-btn" (click)="removeToast(toast)"></i>
-
+    <i class="bi bi-x close-btn" (click)="removeToast(t, $event)"></i>
   </div>
 </div>

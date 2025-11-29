@@ -2,6 +2,7 @@ import { Component, OnInit, signal } from '@angular/core';
 import { NgToastService } from 'ng-angular-popup';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { HomePageService } from '../_services/homePageService/homePage/home-page.service';
+import { ToastManagerService } from '../_services/toastMangerService/toast-manager.service';
 
 @Component({
   selector: 'app-home',
@@ -14,7 +15,8 @@ export class HomeComponent implements OnInit {
 
   constructor(private homePageService: HomePageService,
     private toast: NgToastService,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private toastManagerService: ToastManagerService
   ) { }
 
   ngOnInit(): void {
@@ -33,7 +35,6 @@ export class HomeComponent implements OnInit {
          // console.log(res);
         this.sliderData = res.data.sliderDtoList;
         this.productData = res.data.productDetailsList
-       
         this.spinner.hide();
       },
       error: (err: any) => {

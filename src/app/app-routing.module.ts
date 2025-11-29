@@ -12,6 +12,7 @@ import { ManageAddressComponent } from './customerDashboard/manage-address/manag
 import { CustomerDashboardComponent } from './customerDashboard/customer-dashboard/customer-dashboard.component';
 import { ShoppingCartComponent } from './productContainer/shopping-cart/shopping-cart.component';
 import { PaymentCheckoutComponent } from './productContainer/payment-checkout/payment-checkout.component';
+import { OrdersComponent } from './customerDashboard/orders/orders.component';
 
 
 const routes: Routes = [
@@ -32,6 +33,7 @@ const routes: Routes = [
                   { path: 'shopper', component: HomeComponent},
                   { path: 'dashboard', component: CustomerDashboardComponent},
                   { path: 'shipping-address', component: ManageAddressComponent},
+                  { path: 'orders', component: OrdersComponent},
                 ],
 },
 {

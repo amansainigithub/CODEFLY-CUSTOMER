@@ -1,0 +1,18 @@
+.order-table {
+        font-size: 11px;
+    }
+    .order-img {
+    width: 65px;
+    height: 65px;
+    border-radius: 5px;
+    object-fit: cover;
+    border: 1px solid #e5e5e5; /* Light subtle border */
+}
+
+    .orders-heading {
+        font-size: 18px;
+        font-weight: 500;
+        margin-bottom: 12px;
+        border-left: 4px solid #0d6efd;
+        padding-left: 10px;
+    }

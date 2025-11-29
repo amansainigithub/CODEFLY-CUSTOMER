@@ -110,3 +110,51 @@
 .custom-toast {
   pointer-events: auto;
 }
+
+
+
+/* ##################################################################### */
+
+/* Base */
+.toast-container {
+  position: fixed;
+  z-index: 99999;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* ===== Positions ===== */
+.toast-top-left {
+  top: 16px;
+  left: 16px;
+}
+
+.toast-top-center {
+  top: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.toast-top-right {
+  top: 16px;
+  right: 16px;
+}
+
+.toast-bottom-left {
+  bottom: 16px;
+  left: 16px;
+}
+
+.toast-bottom-center {
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.toast-bottom-right {
+  bottom: 16px;
+  right: 16px;
+}
+
+

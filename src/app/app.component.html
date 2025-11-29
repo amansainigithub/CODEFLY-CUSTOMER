@@ -4,8 +4,9 @@
     Loading... </p>
 </ngx-spinner>
 
-<!-- TOAST MESSAGE -->
+<!-- TOAST MANAGER OWN -->
 <app-toast-manager #toastRef></app-toast-manager>
+<!-- TOAST MANAGER OWN -->
 
 <!-- ################################################################################################################ -->
 <!-- ################################################################################################################ -->
@@ -144,6 +145,14 @@
               </a>
             </li>
 
+            <li class="nav-item">
+              <a class="nav-link px-4 py-2 rounded d-flex align-items-center" routerLink="/customer/orders"
+                [class.active]="activeTab === '/customer/orders'"
+                (click)="setActiveTab('/customer/orders')">
+                <i class="bi bi-box-seam me-2"></i> Orders
+              </a>
+            </li>
+
             <hr>
             <li class="nav-item">
               <a class="nav-link px-4 py-2 rounded d-flex align-items-center" routerLink="#"
@@ -174,5 +183,3 @@
  <!-- ########################################## USER LOGIN ENDING ############################################## -->
 
 <ng-toast />
-
-

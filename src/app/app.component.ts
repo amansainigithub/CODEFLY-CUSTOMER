@@ -33,7 +33,7 @@ export class AppComponent {
     private router: Router,
     private spinner: NgxSpinnerService,
     public cartService: CartService,
-    private toastService: ToastManagerService
+    private toastManagerService: ToastManagerService
   ) {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
@@ -42,10 +42,11 @@ export class AppComponent {
     });
   }
 
+  // TOAST MANAGER SERVICE REGISTER
   ngAfterViewInit() {
-  this.toastService.register(this.toastRef);
+  this.toastManagerService.register(this.toastRef);
   } 
-
+ // TOAST MANAGER SERVICE REGISTER
 
 
 
@@ -67,14 +68,16 @@ export class AppComponent {
 
         if (
           currentUrl === '/customer/dashboard' ||
-          currentUrl === '/customer/shipping-address'
+          currentUrl === '/customer/shipping-address' ||
+          currentUrl === '/customer/orders'
         ) {
           this.setActiveTab(currentUrl);
         }
 
         if (
           currentUrl === '/customer/dashboard' ||
-          currentUrl === '/customer/shipping-address'
+          currentUrl === '/customer/shipping-address' ||
+          currentUrl === '/customer/orders'
         ) {
           this.homePageFlag = true;
         } else {
@@ -186,4 +189,16 @@ export class AppComponent {
 
   // ****************SEARCH DATA ENDING**********************
 // ###################################################################################
+
+
+toastChecker(){
+  this.toastManagerService.show(
+    'warn',
+    'Success',
+    'Neemans Tread Basics Shoes for Men | Walking Shoes | Casual Sneakers for Men Neemans Tread Basics Shoe'
+    ,'toast-bottom-center' 
+    ,2000,)
+  }
+
+
 }

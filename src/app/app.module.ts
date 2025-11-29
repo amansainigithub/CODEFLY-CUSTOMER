@@ -34,6 +34,7 @@ import { ShoppingCartComponent } from './productContainer/shopping-cart/shopping
 import { PaymentCheckoutComponent } from './productContainer/payment-checkout/payment-checkout.component';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import { ToastManagerComponent } from './components/toastManager/toast-manager/toast-manager.component';
+import { OrdersComponent } from './customerDashboard/orders/orders.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -49,7 +50,8 @@ import { ToastManagerComponent } from './components/toastManager/toast-manager/t
     CustomerDashboardComponent,
     ShoppingCartComponent,
     PaymentCheckoutComponent,
-    ToastManagerComponent
+    ToastManagerComponent,
+    OrdersComponent
   ],
   imports: [
     BrowserModule,
