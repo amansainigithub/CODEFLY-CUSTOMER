@@ -16,13 +16,15 @@ export class ProductDetailsComponent {
   productName: any;
   productBrand: any;
   productData: any;
-  mainImage: any;
+  productVariants: any;
   productPrice: any;
   productDiscount: any;
   productMrp: any;
   selectedSize: string | null = null;
   isOutOfStock: boolean = false;
   isLoading: boolean = false;
+
+  mainMedia: any;
 
   constructor(
     private route: ActivatedRoute,
@@ -57,11 +59,26 @@ export class ProductDetailsComponent {
     this.ProductDetailsService.getProductDetails( this.productId,  this.productName).subscribe({
       next: (res: any) => {
         console.log(res);
+        //PRODUCT DETAILS
         this.productData = res.data.pw;
-        this.mainImage = res.data.pw.productMainImage;
+
+        //PRODYCT VARIANTS (SIZES)
+        this.productVariants = res.data.pv;
+
+        //PRODUCT PRICE
         this.productPrice = res.data.pw.productPrice;
+
+        //PRODUCT MRP
         this.productMrp = res.data.pw.productMrp;
+
+        //PRODUCT DISCOUNT
         this.productDiscount = res.data.pw.productDiscount;
+
+        //MEDIA IMAGE FILE URL AND TYPE
+        this.mainMedia = {
+          url: res.data.pw.productFilesDtos[0].pfileUrl,
+          type: res.data.pw.productFilesDtos[0].pfileType
+        };
 
         this.spinner.hide();
       },
@@ -79,9 +96,15 @@ export class ProductDetailsComponent {
   }
 
   //Change main Image
-  changeMainImage(newImage: string) {
-    this.mainImage = newImage;
-  }
+  changeMainMedia(file: any) {
+  this.mainMedia = {
+    url: file.pfileUrl,
+    type: file.pfileType
+  };
+}
+//Change main Image 
+
+  
 
   // ##### ADD TO CART ######
   productAddToCart(productData: any): void {

@@ -3,6 +3,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { NgToastService } from 'ng-angular-popup';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { ToastManagerService } from '../toastMangerService/toast-manager.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +15,7 @@ export class CartService {
   constructor(
     private spinner: NgxSpinnerService,
     private toast: NgToastService,
+    private toastManagerService:ToastManagerService,
     private router: Router,
     private _snackBar:MatSnackBar
   ) {
@@ -33,22 +35,13 @@ export class CartService {
 
   addToCart(productData: any): void {
 
-  if (this.cartItems.length >= 50) {
-    this._snackBar.open('No more items can be added !!', 'Close', {
-      duration: 2000,
-      horizontalPosition: 'right',
-      verticalPosition: 'top',
-    });
+  if (this.cartItems.length >= 10) {
+    this.toastManagerService.show('info','','No more items can be added !','toast-top-right' ,2000,);
     return;
   }
 
   if (!this.selectedSize) {
-    this.toast.warning({
-      detail: 'Hey,',
-      summary: 'Please Select Size.',
-      position: 'topRight',
-      duration: 2000,
-    });
+    this.toastManagerService.show('warn','','Please Select Size','toast-top-right' ,2000,)
     return;
   }
 
@@ -114,24 +107,16 @@ export class CartService {
 
   this.saveCart();
 
-  this.toast.success({
-    detail: 'Success',
-    summary: 'Product Added to Cart',
-    position: 'topRight',
-    duration: 2000,
-  });
+  //TOAST MANAGER SERVICE USAGE
+  this.toastManagerService.show('success','Success','Product Added to Cart','toast-top-right' ,2000,);
 }
 
   
 
   buyNow(productData: any): void {
     if (!this.selectedSize) {
-      this.toast.warning({
-        detail: 'Hey,',
-        summary: 'Please Select Size.',
-        position: 'topRight',
-        duration: 2000,
-      });
+    //TOAST MANAGER SERVICE USAGE
+    this.toastManagerService.show('warn','','Please Select Size','toast-top-right' ,2000,)
       return;
     }
   
@@ -177,12 +162,9 @@ export class CartService {
     }
   
     this.saveCart();
-    this.toast.success({
-      detail: 'Success',
-      summary: 'Product Added to Cart',
-      position: 'topRight',
-      duration: 2000,
-    });
+    
+    //TOAST MANAGER SERVICE USAGE
+    this.toastManagerService.show('success','Success','Product Added to Cart','toast-top-right' ,2000,);
   
     this.router.navigateByUrl('/cart');
   }

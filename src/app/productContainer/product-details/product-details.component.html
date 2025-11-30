@@ -12,30 +12,47 @@
 
         <div class="row" *ngIf="productData">
 
-            <!-- Sidebar Thumbnails -->
-            <div class="col-md-1" *ngIf="productData; else loadingTemplate">
+            <!-- Sidebar Images -->
+            <div class="col-md-1" *ngIf="productData">
                 <div class="d-flex flex-column vertical-thumbnails">
-                    <img *ngFor="let productImages of productData.productFilesDtos" [src]="productImages.pfileUrl"
+                     <ng-container *ngFor="let file of productData.productFilesDtos">
+
+                        <!-- Image Thumbnail -->
+                        <img *ngIf="file.pfileType === 'IMAGE'" 
+                            [src]="file.pfileUrl"
+                            class="img-thumbnail mb-2"
+                            alt="Thumbnail"
+                            (mouseenter)="changeMainMedia(file)">
+
+                        <!-- Video Thumbnail -->
+                        <video *ngIf="file.pfileType === 'VIDEO'" 
+                            [src]="file.pfileUrl"
+                            muted
+                            class="img-thumbnail mb-2"
+                            (mouseenter)="changeMainMedia(file)">
+                        </video>
+
+                    </ng-container>
+                    <!-- <img *ngFor="let productImages of productData.productFilesDtos" [src]="productImages.pfileUrl"
                         class="img-thumbnail mb-2" alt="Thumbnail"
-                        (mouseenter)="changeMainImage(productImages.pfileUrl)">
+                        (mouseenter)="changeMainImage(productImages.pfileUrl)"> -->
                 </div>
             </div>
 
-            <ng-template #loadingTemplate>
-                <p>Loading product details...</p>
-            </ng-template>
-
             <!-- Main Product Image -->
-
             <div class="col-md-5 ">
-                <img [src]="mainImage" class="img-fluid border sticky-image mb-2 productImage" alt="Product Image">
 
-                <div class="d-flex horizontal-thumbnails">
-                    <span *ngFor="let productFiles of productData.productFilesDtos">
-                        <img *ngIf="productFiles.pFileType === 'IMAGE'" [src]="productFiles.pfileUrl"
-                            class="border img-thumbnail me-2" width="50px" alt="Color Option">
-                    </span>
-                </div>
+                 <!-- If main media is image -->
+                    <img *ngIf="mainMedia?.type === 'IMAGE'"
+                        [src]="mainMedia.url"
+                        class="img-fluid border sticky-image mb-2 productImage" />
+
+                    <!-- If main media is video -->
+                    <video *ngIf="mainMedia?.type === 'VIDEO'"
+                        [src]="mainMedia.url"
+                        controls
+                        class="img-fluid border sticky-image mb-2">
+                    </video>
             </div>
 
             <!-- Product Details -->
@@ -117,8 +134,175 @@
                 </ng-container>
 
 
-                <!-- features-container STARTING -->
+
+
+                <!-- PRODUCT VARIANTS -->
+                <div class="mt-4">
+                    <div class="d-flex align-items-center">
+                        <h6 class="mb-0">Variants</h6>
+                    </div>
+                    <div class="d-flex gap-2 flex-wrap mt-2 variant-container">
+                        <a  *ngFor="let item of productVariants"
+                            href="/pd?productId={{item.productId}}&pN={{item.productName}}&brand={{item.brand}}&price={{item.productPrice}}&mrp={{item.productMrp}}"
+                            class="variant-card p-1 text-decoration-none"
+                            [ngClass]="{ 'selected-variant' : item.productId == productId }">
+                            <img  [src]="item.productMainImage"  alt="variant"  class="variant-img img-fluid"/>
+                            <div class="variant-divider"></div>
+                            <div class="variant-prices mt-1">
+                                <p class="sale-price mb-0">₹{{ item.productPrice }}</p>
+                                <p class="mrp mb-0">₹{{ item.productMrp }}</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <!-- PRODUCT VARIANTS -->
+                 
+
+
+
+                <!-- ABOUT THIS ITEMS -->
+                <div class="container mt-4 border-1">
+                    <h5 class="fw-bold mb-3">Product Details</h5>
+
+                    <div class="product-details">
+
+                        <div class="detail-row">
+                            <span class="detail-key">Neck</span>
+                            <span class="detail-value">Mandarin</span>
+                        </div>
+
+                        <div class="detail-row">
+                            <span class="detail-key">Sleeve Length</span>
+                            <span class="detail-value">Short Sleeves</span>
+                        </div>
+
+                        <div class="detail-row">
+                            <span class="detail-key">Sleeve Styling</span>
+                            <span class="detail-value">Regular</span>
+                        </div>
+
+                        <div class="detail-row">
+                            <span class="detail-key">Pattern</span>
+                            <span class="detail-value">Solid</span>
+                        </div>
+
+                        <div class="detail-row">
+                            <span class="detail-key">Print / Pattern Type</span>
+                            <span class="detail-value">Solid</span>
+                        </div>
+
+                        <div class="detail-row">
+                            <span class="detail-key">Net Quantity (N)</span>
+                            <span class="detail-value">1</span>
+                        </div>
+
+                        <div class="detail-row">
+                            <span class="detail-key">Number of Pockets</span>
+                            <span class="detail-value">No Pocket</span>
+                        </div>
+
+                        <div class="detail-row">
+                            <span class="detail-key">Occasion</span>
+                            <span class="detail-value">Casual</span>
+                        </div>
+
+                        <div class="detail-row">
+                            <span class="detail-key">Hemline</span>
+                            <span class="detail-value">Straight</span>
+                        </div>
+
+                        <div class="detail-row">
+                            <span class="detail-key">Country of Origin</span>
+                            <span class="detail-value">India</span>
+                        </div>
+
+                        <p>
+                            These Men's Indigo Blue Baggy Fit Washed Cargo Mid-Rise Jeans bring together washed 
+                            detailing with utilitarian pockets for a street-smart edge. Team them with an oversized
+                             tee and sneakers for an effortless off-duty look.
+                        </p>
+
+                    </div>
+                </div>
+                <!-- ABOUT THIS ITEMS -->
+
+
+                <!-- Product more Details STARTING -->
                 <div class="container">
+                    <div class="accordion mt-4" id="productMoreDetailsAcc">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingMoreDetails">
+                                <button class="accordion-button collapsed py-2" 
+                                        type="button" 
+                                        data-bs-toggle="collapse" 
+                                        data-bs-target="#collapseMoreDetails"
+                                        aria-expanded="false" 
+                                        aria-controls="collapseMoreDetails">
+                                    Product More Details
+                                </button>
+                            </h2>
+
+                            <div id="collapseMoreDetails" 
+                                class="accordion-collapse collapse" 
+                                aria-labelledby="headingMoreDetails" 
+                                data-bs-parent="#productMoreDetailsAcc">
+
+                                <div class="accordion-body p-2">
+                                    <ul class="details-list fs14 mb-0">
+                                        <li>High-quality cotton fabric adjustable for all seasons</li>
+                                        <li>Soft and breathable material suitable for daily use</li>
+                                        <li>Unique printed design with long-lasting colors</li>
+                                        <li>Machine washable; maintains shape after multiple washes</li>
+                                        <li>Suitable for casual wear, outing, and office use</li>
+                                    </ul>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>    
+                </div>
+                <!-- Product more Details ENDING--> 
+
+
+                <!-- SELLER DETAIS STARTING -->
+                <div class="seller-card mt-4">
+                    <p class="mb-3">Sold By</p>
+
+                    <div class="seller-header">
+                        <img src="../../../assets/shop icons/store-2017.png" alt="shop" class="seller-logo">
+
+                        <div class="seller-info">
+                            <p class="seller-title mb-1">SHIV SHAKTI ENTERPRICES</p>
+                        </div>
+
+                        <button mat-stroked-button color="primary">View Shop</button>
+                    </div>
+
+                    <div class="seller-stats mt-3">
+                        <div class="stat-box">
+                            <span class="rating-pill">4.0 ★</span>
+                            <small class="muted-text">96,304 Ratings</small>
+                        </div>
+
+                        <div class="stat-box">
+                            <span class="stat-value">899</span>
+                            <small class="muted-text">Followers</small>
+                        </div>
+
+                        <div class="stat-box">
+                            <span class="stat-value">40</span>
+                            <small class="muted-text">Products</small>
+                        </div>
+                    </div>
+                </div>
+                  <!-- SELLER DETAIS STARTING ENDING-->
+
+
+
+
+
+                <!-- features-container STARTING -->
+                <div class="container mt-4">
                     <div class="row features-container">
                         <div class="col-xl-2 col-lg-3 col-md-2 col-sm-2 col-3 feature-item">
                             <div class="feature-icon"><i class="bi bi-truck"></i></div>
