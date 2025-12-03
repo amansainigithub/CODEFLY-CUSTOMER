@@ -5,6 +5,7 @@ import { NgToastService } from 'ng-angular-popup';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ProductDetailsService } from '../../_services/productContainerServices/productDetailsServices/product-details.service';
 import { ToastManagerService } from '../../_services/toastMangerService/toast-manager.service';
+import { RecentProductService } from '../../_services/RecentProductsService/recent-product.service';
 
 @Component({
   selector: 'app-product-details',
@@ -32,7 +33,8 @@ export class ProductDetailsComponent {
     private ProductDetailsService: ProductDetailsService,
     private toast: NgToastService,
     private spinner: NgxSpinnerService,
-    private toastManager: ToastManagerService
+    private toastManager: ToastManagerService,
+    private recentProductService: RecentProductService
   ) {}
 
   ngOnInit(): void {
@@ -80,6 +82,11 @@ export class ProductDetailsComponent {
           type: res.data.pw.productFilesDtos[0].pfileType
         };
 
+
+        //ADD TO RECENTLY VIEWED PRODUCTS START
+        this.addRecentViewedProduct(this.productData);
+        //ADD TO RECENTLY VIEWED PRODUCTS ENDING
+
         this.spinner.hide();
       },
       error: (err: any) => {
@@ -103,6 +110,11 @@ export class ProductDetailsComponent {
   };
 }
 //Change main Image 
+
+
+addRecentViewedProduct(productData: any) {
+    this.recentProductService.addProduct(productData);
+  }
 
   
 
