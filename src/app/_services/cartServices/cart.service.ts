@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { NgToastService } from 'ng-angular-popup';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastManagerService } from '../toastMangerService/toast-manager.service';
+import { TokenStorageService } from '../token-storage.service';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,8 @@ export class CartService {
     private toast: NgToastService,
     private toastManagerService:ToastManagerService,
     private router: Router,
-    private _snackBar:MatSnackBar
+    private _snackBar:MatSnackBar,
+    private tokenStorageService:TokenStorageService,
   ) {
     this.loadCart();  // Load cart when service initializes
   }
@@ -34,6 +36,12 @@ export class CartService {
   private cartItems: any[] = [];
 
   addToCart(productData: any): void {
+
+    if(!this.tokenStorageService.getToken()){
+      this.toastManagerService.show('info','','Please login to add items to cart','toast-top-right' ,2000,);
+      this.router.navigateByUrl('/login');
+      return
+    }
 
   if (this.cartItems.length >= 10) {
     this.toastManagerService.show('info','','No more items can be added !','toast-top-right' ,2000,);

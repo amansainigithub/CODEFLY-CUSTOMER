@@ -7,6 +7,7 @@ import { CartService } from '../../_services/cartServices/cart.service';
 import { TokenStorageService } from '../../_services/token-storage.service';
 import { RazorpayService } from '../../_services/payments/razorpayService/razorpay.service';
 import { Router } from '@angular/router';
+import { ToastManagerService } from '../../_services/toastMangerService/toast-manager.service';
 
 declare var bootstrap: any; // Import Bootstrap JavaScript
 declare var Razorpay: any;
@@ -49,7 +50,7 @@ export class PaymentCheckoutComponent {
 
   constructor(
     private addressService: AddressServiceService,
-    private toast: NgToastService,
+    private toastManagerService:ToastManagerService,
     private spinner: NgxSpinnerService,
     public cartService: CartService,
     private tokenStorageService: TokenStorageService,
@@ -82,12 +83,7 @@ export class PaymentCheckoutComponent {
     console.log(this.cartService.getCartLength());
 
     if (this.cartService.getCartLength() <= 0) {
-      this.toast.success({
-        detail: 'Success',
-        summary: 'Please Add Some Items to cart !! ',
-        position: 'bottomRight',
-        duration: 2000,
-      });
+       this.toastManagerService.show('info','','Please Add Some Items to cart !!','toast-top-right' ,2000,);
       this.router.navigateByUrl('/home');
     }
 
@@ -108,12 +104,7 @@ export class PaymentCheckoutComponent {
       },
       error: (err: any) => {
         console.error('Error fetching addresses:', err);
-        this.toast.error({
-          detail: 'Error',
-          summary: 'Something went wrong',
-          position: 'bottomRight',
-          duration: 2000,
-        });
+        this.toastManagerService.show('warn','warning','Something went wrong','toast-top-right' ,2000,);
         this.spinner.hide();
       },
     });
@@ -131,12 +122,7 @@ export class PaymentCheckoutComponent {
     this.spinner.show();
     this.addressService.setDefaultAddress(id).subscribe({
       next: (res: any) => {
-        this.toast.success({
-          detail: 'Success',
-          summary: 'Address Removed',
-          position: 'bottomRight',
-          duration: 2000,
-        });
+        this.toastManagerService.show('success','Success','Address Removed','toast-top-right' ,2000,);
         this.spinner.hide();
 
         //get Address List
@@ -144,12 +130,7 @@ export class PaymentCheckoutComponent {
       },
       error: (err: any) => {
         console.error('Delete Failed', err);
-        this.toast.error({
-          detail: 'Error',
-          summary: 'Something went wrong',
-          position: 'bottomRight',
-          duration: 2000,
-        });
+        this.toastManagerService.show('error','Error','Something went wrong','toast-top-right' ,2000,);
         this.spinner.hide();
       },
     });
@@ -172,12 +153,7 @@ export class PaymentCheckoutComponent {
       },
       error: (err: any) => {
         console.error('Error fetching addresses:', err);
-        this.toast.error({
-          detail: 'Error',
-          summary: 'Something went wrong',
-          position: 'bottomRight',
-          duration: 2000,
-        });
+        this.toastManagerService.show('error','Error','Something went wrong','toast-top-right' ,2000,);
         this.spinner.hide();
       },
     });
@@ -189,12 +165,7 @@ export class PaymentCheckoutComponent {
     this.spinner.show();
     this.addressService.updateAddress(this.updateAddressForm).subscribe({
       next: (res: any) => {
-        this.toast.success({
-          detail: 'Success',
-          summary: 'Address Updated',
-          position: 'bottomRight',
-          duration: 2000,
-        });
+        this.toastManagerService.show('success','Success','Address Updated','toast-top-right' ,2000,);
         this.spinner.hide();
 
         this.closeModal();
@@ -203,12 +174,7 @@ export class PaymentCheckoutComponent {
       },
       error: (err: any) => {
         console.error('Error saving address:', err);
-        this.toast.error({
-          detail: 'Error',
-          summary: 'Something went wrong',
-          position: 'bottomRight',
-          duration: 2000,
-        });
+        this.toastManagerService.show('warn','warning','Address not Updated','toast-top-right' ,2000,);
         this.spinner.hide();
       },
     });
@@ -230,12 +196,8 @@ export class PaymentCheckoutComponent {
       this.addressHolder === null ||
       this.addressHolder === undefined
     ) {
-      this.toast.warning({
-        detail: 'Success',
-        summary: 'Please select a delivery address before proceeding.',
-        position: 'bottomRight',
-        duration: 3000,
-      });
+      this.toastManagerService.show('info','warning','Please select a delivery address before proceeding.',
+        'toast-top-right' ,2000,);
       return;
     }
 
@@ -245,12 +207,8 @@ export class PaymentCheckoutComponent {
     ) {
       stepper.next();
     } else {
-      this.toast.success({
-        detail: 'Success',
-        summary: 'Please select a delivery address before proceeding.',
-        position: 'bottomRight',
-        duration: 3000,
-      });
+      this.toastManagerService.show('info','warning','Please select a delivery address before proceeding.',
+        'toast-top-right' ,2000,);
     }
   }
 
@@ -293,12 +251,7 @@ export class PaymentCheckoutComponent {
       this.addressHolder === null ||
       this.addressHolder === undefined
     ) {
-      this.toast.warning({
-        detail: 'Warning',
-        summary: 'Please select a delivery address before proceeding.',
-        position: 'bottomRight',
-        duration: 3000,
-      });
+      this.toastManagerService.show('warn','warning','Please select a delivery address before proceeding.','toast-top-right' ,2000,);
       this.payLoader = false;
       return;
     }
@@ -354,15 +307,8 @@ export class PaymentCheckoutComponent {
               escape: false,
               backdropclose: false,
               ondismiss: () => {
-                // console.log('Payment popup closed by user');
                 // alert('Payment popup closed before completing the transaction.');
-
-                this.toast.error({
-                  detail: 'Payment Error',
-                  summary: 'Cancle to initiate payment. Please try again.',
-                  position: 'topRight',
-                  duration: 2000,
-                });
+                this.toastManagerService.show('error','Error','Cancle to initiate payment. Please try again.','toast-top-right' ,2000,);
               },
             },
           };
@@ -372,12 +318,7 @@ export class PaymentCheckoutComponent {
         },
         error: (err: any) => {
           this.payLoader = false;
-          this.toast.error({
-            detail: 'Payment Error',
-            summary: 'Please try again | Something Went Wrong',
-            position: 'bottomRight',
-            duration: 2000,
-          });
+          this.toastManagerService.show('error','Payment Error','Please try again | Something Went Wrong','toast-top-right' ,2000,);
         },
       });
   }
@@ -411,12 +352,7 @@ export class PaymentCheckoutComponent {
       this.addressHolder === null ||
       this.addressHolder === undefined
     ) {
-      this.toast.warning({
-        detail: 'Success',
-        summary: 'Please select a delivery address before proceeding.',
-        position: 'bottomRight',
-        duration: 3000,
-      });
+       this.toastManagerService.show('warn','Delivery Address','Please select a delivery address before proceeding.','toast-top-right' ,2000,);
       return;
     }
 
@@ -454,12 +390,7 @@ export class PaymentCheckoutComponent {
         },
         error: (err: any) => {
           console.error('Error Creating COD Order:', err);
-          this.toast.error({
-            detail: 'Error',
-            summary: 'Error Creating COD Order:',
-            position: 'bottomRight',
-            duration: 2000,
-          });
+          this.toastManagerService.show('error','COD Orders','Error Creating COD Order:.','toast-top-right' ,2000,);
           this.spinner.hide();
 
           // Pay Loader Starting...
