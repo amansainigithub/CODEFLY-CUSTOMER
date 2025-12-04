@@ -272,24 +272,7 @@
 
 
 
-.recent-card {
-  height: 270px;
-  width: 100%;
-  overflow: hidden;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 10px;
-  background: #fff;
-}
 
-.recent-img {
-  max-height: 100%;  /* container ke andar full fit */
-  max-width: 100%;
-  object-fit: contain; /* full image - no cut */
-  padding: 5px;
-}
 
-.card-title {
-  height: 32px;
-}
+
+
