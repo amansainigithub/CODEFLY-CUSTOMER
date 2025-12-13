@@ -1,7 +1,6 @@
 
 /* ################################################################################################################ */
 /* NAVBAR STARTING */
-/* Hover open */
 .navbar .dropdown:hover .dropdown-menu {
     display: block;
 }

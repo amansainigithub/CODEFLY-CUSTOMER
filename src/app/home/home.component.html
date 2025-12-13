@@ -1,3 +1,8 @@
+
+<!-- ################################################################################################################ -->
+<!-- ################################################################################################################ -->
+<!-- NAVBAR STARTING -->
+
 <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm" style="font-size: 11px;">
   <div class="container-fluid">
 
@@ -5,112 +10,31 @@
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div class="collapse navbar-collapse" id="megaMenu">
-      <ul class="navbar-nav gap-5"> <!--mx-auto--> 
+    <div class="collapse navbar-collapse">
+      <ul class="navbar-nav gap-5">
 
-        <!-- ========== WOMEN CATEGORY ========== -->
-        <li class="nav-item dropdown position-static">
-          <a class="nav-link dropdown-toggle" href="#" >Women</a>
+        <li class="nav-item dropdown position-static" *ngFor="let categories of categoryNode">
+          <a class="nav-link dropdown-toggle" href="#">
+            {{categories.subCategoryName}}
+          </a>
 
-          <!-- Mega Panel -->
           <div class="dropdown-menu mega-menu p-4">
 
             <div class="row">
 
-              <!-- COLUMN 1 -->
-              <div class="col-md-2">
-                <h6 class="fw-bold mb-2">Clothing</h6>
-                <a class="dropdown-item" href="#">New Arrivals</a>
-                <a class="dropdown-item" href="#">Top Brands</a>
-                <a class="dropdown-item" href="#">Western Wear</a>
-                <a class="dropdown-item" href="#">Shirts, Tops & Tees</a>
-                <a class="dropdown-item" href="#">Dresses</a>
-                <a class="dropdown-item" href="#">Jeans & Jeggings</a>
-                <a class="dropdown-item" href="#">Kurtas</a>
-                <a class="dropdown-item" href="#">Salwar Suits</a>
-                <a class="dropdown-item" href="#">Sarees</a>
-                <a class="dropdown-item" href="#">Sportswear</a>
+              <div class="col-md-2" *ngFor="let categoryType of categories.types" >
+                <h6 class="fw-bold mb-2">
+                  {{categoryType.typeCategoryName}}
+                </h6>
 
-                <h6 class="fw-bold mt-3">HANDLOOMS & HANDICRAFTS</h6>
-              </div>
+                <a class="dropdown-item" href="#" *ngFor="let variantType of categoryType.variants">
+                  {{variantType.variantCategoryName}}
+                </a>
 
-              <!-- COLUMN 2 -->
-              <div class="col-md-2">
-                <h6 class="fw-bold mb-2">SHOES</h6>
-                <a class="dropdown-item" href="#">Fashion Sandals</a>
-                <a class="dropdown-item" href="#">Pumps & Peeptoes</a>
-                <a class="dropdown-item" href="#">Casual Slippers</a>
-                <a class="dropdown-item" href="#">Casual Shoes</a>
-                <a class="dropdown-item" href="#">Boots</a>
-                <a class="dropdown-item" href="#">Sports Shoes</a>
-                <a class="dropdown-item" href="#">Flip-Flops</a>
-                <a class="dropdown-item" href="#">Ethnic Footwear</a>
-
-                <h6 class="fw-bold mt-3">EYEWEAR</h6>
-                <a class="dropdown-item" href="#">Sunglasses</a>
-                <a class="dropdown-item" href="#">Spectacle Frames</a>
-              </div>
-
-              <!-- COLUMN 3 -->
-              <div class="col-md-2">
-                <h6 class="fw-bold mb-2">WATCHES</h6>
-                <a class="dropdown-item" href="#">Gold & Rose-Gold</a>
-                <a class="dropdown-item" href="#">Stainless Steel</a>
-                <a class="dropdown-item" href="#">Leather</a>
-
-                <h6 class="fw-bold mt-3">JEWELLERY</h6>
-                <a class="dropdown-item" href="#">Gold & Diamond</a>
-                <a class="dropdown-item" href="#">Fashion Jewellery</a>
-                <a class="dropdown-item" href="#">Silver Jewellery</a>
-              </div>
-
-              <!-- COLUMN 4 -->
-              <div class="col-md-2">
-                <h6 class="fw-bold mb-2">HANDBAGS & CLUTCHES</h6>
-                <a class="dropdown-item" href="#">Handbags</a>
-                <a class="dropdown-item" href="#">Wallets</a>
               </div>
 
             </div>
 
-          </div>
-        </li>
-
-        <!-- ========== MEN CATEGORY ========== -->
-        <li class="nav-item dropdown position-static">
-          <a class="nav-link dropdown-toggle" href="#">Men</a>
-
-          <div class="dropdown-menu mega-menu p-4">
-            <div class="row">
-              <div class="col-md-2">
-                <h6 class="fw-bold mb-2">CLOTHING</h6>
-                <a class="dropdown-item" href="#">Shirts</a>
-                <a class="dropdown-item" href="#">T-Shirts</a>
-                <a class="dropdown-item" href="#">Jeans</a>
-                <a class="dropdown-item" href="#">Blazers</a>
-              </div>
-
-              <div class="col-md-2">
-                <h6 class="fw-bold mb-2">FOOTWEAR</h6>
-                <a class="dropdown-item" href="#">Casual Shoes</a>
-                <a class="dropdown-item" href="#">Boots</a>
-              </div>
-
-              <div class="col-md-2">
-                <h6 class="fw-bold mb-2">ACCESSORIES</h6>
-                <a class="dropdown-item" href="#">Watches</a>
-                <a class="dropdown-item" href="#">Wallets</a>
-              </div>
-
-            </div>
-          </div>
-        </li>
-
-        <!-- ========== KIDS CATEGORY ========== -->
-        <li class="nav-item dropdown position-static">
-          <a class="nav-link dropdown-toggle" href="#">Kids</a>
-          <div class="dropdown-menu mega-menu p-4">
-            <p class="m-0 small">Kids Category Items…</p>
           </div>
         </li>
 
@@ -119,8 +43,29 @@
 
   </div>
 </nav>
+<!-- NAVBAR ENDING -->
 <!-- ################################################################################################################ -->
 <!-- ################################################################################################################ -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -143,13 +88,8 @@
 
     <!-- ========== DYNAMIC INDICATORS ========== -->
     <div class="carousel-indicators">
-      <button
-        *ngFor="let slide of sliderData; let i = index"
-        type="button"
-        data-bs-target="#carouselExampleDark"
-        [attr.data-bs-slide-to]="i"
-        [class.active]="i === 0"
-        [attr.aria-current]="i === 0 ? 'true' : null"
+      <button *ngFor="let slide of sliderData; let i = index" type="button" data-bs-target="#carouselExampleDark"
+        [attr.data-bs-slide-to]="i" [class.active]="i === 0" [attr.aria-current]="i === 0 ? 'true' : null"
         [attr.aria-label]="'Slide ' + (i + 1)">
       </button>
     </div>
@@ -157,10 +97,7 @@
     <!-- ========== DYNAMIC SLIDES ========== -->
     <div class="carousel-inner">
 
-      <div
-        class="carousel-item"
-        *ngFor="let slide of sliderData; let i = index"
-        [class.active]="i === 0"
+      <div class="carousel-item" *ngFor="let slide of sliderData; let i = index" [class.active]="i === 0"
         data-bs-interval="3000">
 
         <img [src]="slide.fileUrl" class="d-block w-100" [alt]="slide.title">
@@ -310,7 +247,7 @@
 
     <!-- Left side 2 columns -->
     <div class="col-md-2">
-     
+
       <mat-accordion>
         <mat-expansion-panel hideToggle>
           <mat-expansion-panel-header>
@@ -357,19 +294,14 @@
           <!-- Perfect 5 Items Per Row -->
           <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6 mb-4">
 
-            <a  [routerLink]="['/pd']" [queryParams]="{productId: data.productId, pN: data.productName,
-                brand:data.brand , price:data.price , mrp:data.mrp }" 
-             class="card product-card h-100" >
+            <a [routerLink]="['/pd']" [queryParams]="{productId: data.productId, pN: data.productName,
+                brand:data.brand , price:data.price , mrp:data.mrp }" class="card product-card h-100">
 
               <!-- Product Image -->
               <div *ngIf="data?.productMainFileUrl?.length" class="product-image-container">
-                <img
-                  [src]="data.productMainFileUrl"
-                  alt="Product Image"
-                  class="product-image img-fluid"
-                />
+                <img [src]="data.productMainFileUrl" alt="Product Image" class="product-image img-fluid" />
 
-                <div  class="rating-review">
+                <div class="rating-review">
                   40 <i class="bi bi-star-fill"></i> | 300
                 </div>
 
@@ -377,7 +309,7 @@
               </div>
 
               <!-- Product Details -->
-              <div  class="px-2 mt-2">
+              <div class="px-2 mt-2">
                 <p class="product-title">{{ data.brand }}</p>
 
                 <p class="productName mb-1">
@@ -388,10 +320,10 @@
                 <ng-container *ngIf="data.inventory > 0; else outOfStock">
                   <p class="price-details">
                     <span class="actualPrice">Rs.{{ data.price }}</span>
-                    <span class="mrpPrice mx-1">Rs.{{ data.mrp }}</span> 
+                    <span class="mrpPrice mx-1">Rs.{{ data.mrp }}</span>
                     <br>
                     <span class="priceOff mx-1">{{ data.productDiscount }} %</span>
-                    <span style="font-size: 10px;color: rgb(236, 76, 23);" >
+                    <span style="font-size: 10px;color: rgb(236, 76, 23);">
                       Limited Deal offer
                     </span>
                   </p>
@@ -423,6 +355,3 @@
 
 <!-- ################################################################################################################ -->
 <!-- ################################################################################################################ -->
-
-
-

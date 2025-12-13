@@ -14,6 +14,7 @@ export class HomeComponent implements OnInit {
   readonly panelOpenState = signal(false);
   sliderData: any;
   productData: any;
+  categoryNode:any;
 
   constructor(
     private homePageService: HomePageService,
@@ -33,6 +34,11 @@ export class HomeComponent implements OnInit {
         // console.log(res);
         this.sliderData = res.data.sliderDtoList;
         this.productData = res.data.productDetailsList;
+
+        //categoryData
+        this.categoryNode = res.data.categoryDataNode.categoryData;
+        console.log( 'CATEGORY NODE :: ', this.categoryNode);
+        
         this.spinner.hide();
       },
       error: (err: any) => {
