@@ -3,6 +3,7 @@ import { OrdersService } from '../../_services/orderServices/orders/orders.servi
 import { NgToastService } from 'ng-angular-popup';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { TokenStorageService } from '../../_services/token-storage.service';
+import { ToastManagerService } from '../../_services/toastMangerService/toast-manager.service';
 
 @Component({
   selector: 'app-orders',
@@ -20,7 +21,7 @@ export class OrdersComponent {
 
   constructor(
     private orderService: OrdersService,
-    private toast: NgToastService,
+    private toastManagerService:ToastManagerService,
     private spinner: NgxSpinnerService,
     private tokenStorageService: TokenStorageService
   ) {}
@@ -43,23 +44,14 @@ export class OrdersComponent {
         this.filteredItems = this.orderItems;
 
         this.totalElements = res.data['totalElements'];
-        this.toast.success({
-          detail: 'Success',
-          summary: 'Data Fetch Success',
-          position: 'bottomRight',
-          duration: 3000,
-        });
+        this.toastManagerService.show('success','','Data Fetch Success','toast-top-right' ,2000,);
+
         this.spinner.hide();
       },
       error: (err: any) => {
         console.log(err);
         this.spinner.hide();
-        this.toast.error({
-          detail: 'Error',
-          summary: err.error.data.message,
-          position: 'bottomRight',
-          duration: 3000,
-        });
+        this.toastManagerService.show('error','',err.error.data.message,'toast-top-right' ,2000,);
       },
     });
   }

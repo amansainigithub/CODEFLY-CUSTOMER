@@ -7,6 +7,8 @@ import { CartService } from './_services/cartServices/cart.service';
 import { ToastManagerService } from './_services/toastMangerService/toast-manager.service';
 import { ToastManagerComponent } from './components/toastManager/toast-manager/toast-manager.component';
 
+declare var bootstrap: any; // Import Bootstrap JavaScript
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -43,8 +45,12 @@ export class AppComponent {
   }
 
   // TOAST MANAGER SERVICE REGISTER
+  modal: any;
   ngAfterViewInit() {
   this.toastManagerService.register(this.toastRef);
+
+   // ===========Model Property===========
+    this.modal = new bootstrap.Modal(document.getElementById('myModal'));
   } 
  // TOAST MANAGER SERVICE REGISTER
 
@@ -94,11 +100,19 @@ export class AppComponent {
   }
 
   //LOGOUT###
-  logout(): void {
-    this.tokenStorageService.signOut();
-    window.location.reload();
+  openLogoutModel(): void {
+    this.openModel();
+    return;
   }
 
+  logout(): void {
+    this.tokenStorageService.signOut();
+    this.router.navigate(['/home']).then(() => {
+      window.location.reload();
+    });
+    
+
+  }
   // ###################################################################################
   // ****************SEARCH DATA SATRTING**********************
   searchText: string = '';
@@ -201,4 +215,29 @@ toastChecker(){
   }
 
 
+
+
+
+
+
+
+
+
+
+
+ //MODEL OPEN AND CLOSE 
+// #########################################################################################
+// #########################################################################################
+ closeModal() {
+    this.modal.hide();
+  }
+  
+openModel()
+  {
+     this.modal.show();
+  }
+
+// #########################################################################################
+// #########################################################################################
+//MODEL OPEN AND CLOSE
 }

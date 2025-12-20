@@ -2,40 +2,56 @@
 
     <div class="orders-heading">Orders</div>
 
-<table class="table table-bordered align-middle order-table text-center">
-    <thead class="table-light">
-        <tr>
-            <th>S.No</th>
-            <th>Image</th>
-            <th>Product Name</th>
-            <th>Order No.</th>
-            <th>Size</th>
-            <th>Qty</th>        
-            <th>Price</th>
-            
-        </tr>
-    </thead>
+    <ng-container *ngIf="orderItems && orderItems.length > 0; else noProducts">
 
-    <tbody>
-        <tr *ngFor="let item of orderItems let i = index">
-            <td>{{i + 1}}</td>
-            <td  style="max-width: 40px;" class="text-center">
-                
-                <a [routerLink]="['/pd']" [queryParams]="{productId: item.productId, pN: item.productName,
+        <table class="table table-bordered align-middle order-table text-center">
+            <thead class="table-light">
+                <tr>
+                    <th>S.No</th>
+                    <th>Image</th>
+                    <th>Product Name</th>
+                    <th>Order No.</th>
+                    <th>Size</th>
+                    <th>Qty</th>
+                    <th>Price</th>
+
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr *ngFor="let item of orderItems let i = index">
+                    <td>{{i + 1}}</td>
+                    <td style="max-width: 40px;" class="text-center">
+
+                        <a [routerLink]="['/pd']" [queryParams]="{productId: item.productId, pN: item.productName,
                     brand:item.productBrand , price:item.productPrice , mrp:item.productMrp }">
-                    <img [src]="item.fileUrl" class="order-img" />
-                </a>
-            </td>
-            <!-- [routerLink]="['/pd']" [queryParams]="{productId: data.productId, pN: data.productName,
+                            <img [src]="item.fileUrl" class="order-img" />
+                        </a>
+                    </td>
+                    <!-- [routerLink]="['/pd']" [queryParams]="{productId: data.productId, pN: data.productName,
                 brand:data.brand , price:data.price , mrp:data.mrp }" -->
 
-            <td style="max-width: 150px; text-align: left !important;">{{ item.productName }}</td> 
-            <td>{{ item.orderNoPerItem }}</td> 
-            <td>{{ item.productSize }}</td>
-             <td>{{ item.quantity }}</td>         
-            <td>₹{{ item.productPrice }}</td>
-        </tr>
-    </tbody>
-</table>
+                    <td style="max-width: 150px; text-align: left !important;">{{ item.productName }}</td>
+                    <td>{{ item.orderNoPerItem }}</td>
+                    <td>{{ item.productSize }}</td>
+                    <td>{{ item.quantity }}</td>
+                    <td>₹{{ item.productPrice }}</td>
+                </tr>
+            </tbody>
+        </table>
+
+    </ng-container>
+
+
+    <!-- Template to show if no products -->
+    <ng-template #noProducts class="mt-5">
+        <div class="text-center my-5 ">
+            <h4>No Products Found</h4>
+            <p>Your order list is empty.</p>
+            <button mat-raised-button color="primary" routerLink="/home">
+                Back to Shopping
+            </button>
+        </div>
+    </ng-template>
 
 </div>

@@ -8,8 +8,8 @@ body {
 .img-thumbnail {
     cursor: pointer;
     transition: 0.3s;
-    height: 75px;
-    width: 75px;
+    height: 70px;
+    width: 70px;
     object-fit: cover;
 }
 
