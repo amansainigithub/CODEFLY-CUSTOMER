@@ -1,79 +1,68 @@
-<div class="card card-container" >
-    <div class="card-body">
+<div class="card card-container">
+  <div class="card-body">
 
-        <h5 class="text-center">Create Password</h5>
-  
-      <form 
-      #userlogin = "ngForm"
-       (ngSubmit)="userlogin.form.valid && createAccount()" 
-       novalidate>
+    <p class="text-center">
+      Create Password
+      <i class="bi bi-exclamation-circle info-icon"
+        matTooltip="Password must be at least 8 characters long, include an uppercase letter, a lowercase letter, a number, and a special character."
+        matTooltipPosition="right" matTooltipShowDelay="300">
+      </i>
+    </p>
 
-      <label for="inputPassword5" class="form-label">password</label>
-  
-      <div class="input-group">
-          <input 
-          type="password" 
-          id="inputPassword5" 
-          class="form-control" 
-          aria-describedby="Mobile OTP" 
-          name="password"
-          required="required"
-          [(ngModel)]="setupPassForm.password"
-          #password="ngModel"
-          pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$"
-          [class.dirty]="password.dirty" 
-          [class.touched]="password.touched"
-          [ngClass]="{ 'is-invalid': password.errors && (password.touched || password.dirty ) }"
-            >
-            <div *ngIf="password.invalid && (password.dirty || password.touched)" class="invalid-feedback">
-              <div *ngIf="password.errors?.['required']">
-                Password is required.
-              </div>
-              <div *ngIf="password.errors?.['pattern']">
-                Password must be at least 8 characters long, include an uppercase letter, a lowercase letter, a number, and a special character.
-              </div>
-            </div>
-          </div>
 
-        <label for="inputPassword5" class="form-label">conform password</label>
-        <div class="input-group">
-        <input 
-            type="password" 
-            id="inputPassword5" 
-            class="form-control" 
-            aria-describedby="Mobile OTP" 
-            name="conformPassword"
-            required="required"
-            [(ngModel)]="setupPassForm.conformPassword"
-            #conformpassword="ngModel"
-            pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$"
-            [class.dirty]="conformpassword.dirty" 
-            [class.touched]="conformpassword.touched"
-            [ngClass]="{ 'is-invalid': conformpassword.errors && (conformpassword.touched || conformpassword.dirty ) }">
-            
+    <form #userlogin="ngForm" (ngSubmit)="userlogin.valid && createAccount()" novalidate class="p-3">
 
-            <div *ngIf="conformpassword.invalid && (conformpassword.dirty || conformpassword.touched)" class="invalid-feedback">
-              <div *ngIf="conformpassword.errors?.['required']">
-                Password is required.
-              </div>
-              <div *ngIf="conformpassword.errors?.['pattern']">
-                Password must be at least 8 characters long, include an uppercase letter, 
-                a lowercase letter, a number, and a special character.
-              </div>
-            </div>
+      <!-- PASSWORD -->
+      <mat-form-field appearance="outline" class="w-100 mb-3">
+        <mat-label>Enter Password</mat-label>
 
-          </div>
-  
-      <!-- <div id="mobileOtp" class="form-text">
-        OTPs are generated randomly and are often sent to a user's
-        mobile phone or email address in order to authenticate their identity.
-      </div> -->
-  
-      <div class="form-group d-grid gap-2 col-12 mx-auto mt-4">
-        <button  class="btn btn-success btn-sm btn-block"  [disabled]="userlogin.invalid">Create Account</button>
-        
-      </div>
+        <input matInput [type]="hidePassword ? 'password' : 'text'" name="password" required
+          [(ngModel)]="setupPassForm.password" #password="ngModel"
+          pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$">
+
+        <button mat-icon-button matSuffix type="button" (click)="hidePassword = !hidePassword">
+          <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+        </button>
+
+        <mat-error *ngIf="password.errors?.['required']">
+          Password is required
+        </mat-error>
+
+        <mat-error *ngIf="password.errors?.['pattern']">
+          Minimum 8 characters, number & special character required
+        </mat-error>
+      </mat-form-field>
+
+      <!-- CONFIRM PASSWORD -->
+      <mat-form-field appearance="outline" class="w-100 mb-3 mt-2">
+        <mat-label>Confirm Password</mat-label>
+
+        <input matInput [type]="hideConfirmPassword ? 'password' : 'text'" name="conformPassword" required
+          [(ngModel)]="setupPassForm.conformPassword" #conformpassword="ngModel">
+
+        <button mat-icon-button matSuffix type="button" (click)="hideConfirmPassword = !hideConfirmPassword">
+          <mat-icon>{{ hideConfirmPassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+        </button>
+
+        <mat-error *ngIf="conformpassword.errors?.['required']">
+          Confirm Password is required
+        </mat-error>
+
+        <mat-error *ngIf="
+        conformpassword.touched &&
+        setupPassForm.password !== setupPassForm.conformPassword
+      ">
+          Password does not match
+        </mat-error>
+      </mat-form-field>
+
+      <!-- SUBMIT BUTTON -->
+      <button mat-raised-button color="primary" class="w-100 mt-2"  [disabled]="userlogin.invalid">
+        Create Account
+      </button>
+
     </form>
-  
-    </div>
+
+
   </div>
+</div>

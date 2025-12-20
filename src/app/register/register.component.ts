@@ -1,10 +1,13 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, QueryList, ViewChildren } from '@angular/core';
 import { AuthService } from '../_services/auth.service';
 import { Router } from '@angular/router';
-import { SnackBarHelperService } from '../_helpers/snackBar_Service/snack-bar-helper.service';
-import { NgToastService } from 'ng-angular-popup';
 import { TokenStorageService } from '../_services/token-storage.service';
 import { FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
+import { ToastManagerService } from '../_services/toastMangerService/toast-manager.service';
+import { NgxSpinnerService } from 'ngx-spinner';
+
+declare var bootstrap: any; // Import Bootstrap JavaScript
+
 
 @Component({
   selector: 'app-register',
@@ -26,10 +29,9 @@ export class RegisterComponent {
   constructor(
     private authService: AuthService,
     private router:Router,
-    private _snackBarHelper: SnackBarHelperService,
-    private toast:NgToastService,
     private tokenStorageService:TokenStorageService,
-  private fb: FormBuilder) { }
+    private toastManagerService:ToastManagerService,
+    private spinner: NgxSpinnerService) { }
 
   ngOnInit(): void {
    var node =  this.tokenStorageService.getUser();
@@ -52,8 +54,7 @@ onSubmitFreshUser()
     } 
     else 
     {
-      this._snackBarHelper
-      .OpenSnackbar_verticalPosition_top_right('Invalid Mobile NUmber! Please Enter Ten Digit Mobile No.', 'cancle',3000);
+       this.toastManagerService.show('error','','Invalid Mobile NUmber! Please Enter Ten Digit Mobile No.','toast-top-right' ,2000,);
       return;
     }
 
@@ -62,23 +63,84 @@ onSubmitFreshUser()
     this.authService.registerFreshUser(mobile).subscribe(
       data => {
         if(data.message == "FLY_LOGIN_PAGE"){
-          this.toast.error({detail:"Error",summary:"User Already Registered", position:"topRight",duration:3000})
-          this.router.navigateByUrl('/login');
+          this.toastManagerService.show('error','','User Already Registered please Login.!','toast-top-right' ,3000,);
+          // this.router.navigateByUrl('/login');
           return;
         }else{
           this.mobileOtpForm = true;
           this.registerForm = false;
-          // this._snackBarHelper.normalSnackBar('OTP Sent Success', 'cancle',2000);
-          this.toast.success({detail:"Success",summary:"OTP Sent Success", position:"topRight",duration:3000})
+          this.toastManagerService.show('success','','OTP Sent Success','toast-top-right' ,3000,);
+          
+          //OTP MODEL OPEN
+          this.openModal()
         }
       },
       err => {
         console.log(err);
-        this._snackBarHelper.normalSnackBar(err.error.message, 'cancle',2000);
+        this.toastManagerService.show('error','','Error.','toast-top-right' ,2000,);
       }
     );
 
 }
+
+   
+
+
+
+// ***********************OTP VERIFY WINDOW STARTING***************************
+
+@ViewChildren('otpInput') otpInputs!: QueryList<ElementRef>;
+
+otp: string[] = ['', '', '', '', '', ''];
+isOtpComplete = false;
+
+onOtpInput(event: any, index: number) {
+  const value = event.target.value;
+
+  // allow only digits
+  if (!/^[0-9]$/.test(value)) {
+    event.target.value = '';
+    return;
+  }
+
+  this.otp[index] = value;
+
+  // move next
+  if (index < this.otpInputs.length - 1) {
+    this.otpInputs.toArray()[index + 1].nativeElement.focus();
+  }
+
+  this.checkOtpComplete();
+}
+
+onKeyDown(event: KeyboardEvent, index: number) {
+  if (event.key === 'Backspace') {
+    if (this.otp[index]) {
+      this.otp[index] = '';
+      this.otpInputs.toArray()[index].nativeElement.value = '';
+    } else if (index > 0) {
+      this.otpInputs.toArray()[index - 1].nativeElement.focus();
+      this.otp[index - 1] = '';
+      this.otpInputs.toArray()[index - 1].nativeElement.value = '';
+    }
+
+    this.checkOtpComplete();
+    event.preventDefault();
+  }
+}
+
+checkOtpComplete() {
+  this.isOtpComplete = this.otp.every(d => d !== '');
+}
+
+finalOtp:any;
+verifyOtp() {
+  if (!this.isOtpComplete) return;
+  this.finalOtp = this.otp.join('');
+  console.log('OTP Received:', this.finalOtp);
+  this.verifyMobileOtp();
+}
+
 
 verifyOtpForm: any = {
   mobileOtp: null,
@@ -86,30 +148,59 @@ verifyOtpForm: any = {
 };
 
 verifyMobileOtp(){
-
+  this.spinner.show();
+  this.verifyOtpForm.mobileOtp = this.finalOtp;
   this.verifyOtpForm.username = this.FreshUserform.mobile;
-  this.authService.verifyMobileOtp(this.verifyOtpForm).subscribe(
-    data => {
-      console.log(data);
-      // this._snackBarHelper.normalSnackBar("OTP Verified Success","Undo",2000);
-      this.toast.success({detail:"Success",summary:"OTP Verified Success", position:"topRight",duration:3000})
+  this.authService.verifyMobileOtp(this.verifyOtpForm).subscribe({
+    next:(res:any)=>{
+      console.log(res);
+      this.toastManagerService.show('success','','OTP Verified Success.','toast-top-center' ,3000,);
       this.router.navigateByUrl('/passwordSetup',{ state: { username: this.verifyOtpForm.username  } });
+      this.spinner.hide();
+      this.closeModal();
     },
-    err => {
-      // this._snackBarHelper.normalSnackBar("please Enter Correct OTP", 'cancle',2000);
-      this.toast.info({detail:"Error",summary:"please Enter Correct OTP", position:"topRight",duration:3000});
-    }
-  );
-
+     error: (err: any) => {
+        console.error('Error saving address:', err);
+        this.toastManagerService.show('error','','please Enter Correct OTP.','toast-top-right' ,2000,);
+        this.spinner.hide();
+      }
+  });
 }
+// ***********************OTP VERIFY  WINDOW ENDING***************************
 
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  // #################################################################################################################
+// ###################################################################################################################
+  modal: any;
+  ngAfterViewInit() {
+    this.modal = new bootstrap.Modal(document.getElementById('otpmodel'));
+  }
+
+  closeModal() {
+    this.modal.hide();
+  }
+
+  openModal() {
+    this.modal.show();
+  }
 // #################################################################################################################
 // ###################################################################################################################
-
-
-
 
 }

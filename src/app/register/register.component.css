@@ -9,37 +9,63 @@ label {
   }
   
   .card {
-    background-color: white;
-    padding: 20px 25px 30px;
-    margin: 0 auto 25px;
-    -moz-border-radius: 2px;
-    -webkit-border-radius: 2px;
-    border-radius: 12px;
-    -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-    -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-  }
-  
-  .profile-img-card {
-    width: 96px;
-    height: 96px;
-    margin: 0 auto 10px;
-    display: block;
-    -moz-border-radius: 50%;
-    -webkit-border-radius: 50%;
-    border-radius: 50%;
-  }
+  position: relative;
+  padding: 10px 25px 30px;
+  margin: 50px auto 25px;
+  border-radius: 15px;
+  background: #fff; /* card plain */
 
+  box-shadow:
+    8px 10px 30px rgba(90, 140, 255, 0.35),
+    4px 6px 12px rgba(90, 140, 255, 0.25);
 
-  .mobileOtpCard{
+  overflow: hidden;
+}
+.card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 15px;
+  padding: 2px; /* border thickness */
+
+  background: linear-gradient(
+    135deg,
+    transparent 60%,
+    #6ea8ff,
+    #9b7bff,
+    #6ecbff
+  );
+  background-size: 300% 300%;
+  animation: borderFlow 20s ease infinite;
+
+  /* show only border */
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+
+  pointer-events: none;
+}
+@keyframes borderFlow {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.mobileOtpCard{
     max-width: 400px !important;
     padding: 40px 40px;
   }
 
-
-
   /* DIVIDER CSS */
-  .divider {
+.divider {
     display: flex;
     align-items: center;
     text-align: center;
@@ -64,4 +90,78 @@ label {
 .divider span {
     color: #aaa;
     font-size: 14px;
+}
+
+/* remove Exclamination mark in input fieldset */
+.form-control.is-invalid {
+  background-image: none !important;
+}
+/* remove Exclamination mark in input fieldset */
+
+
+/* MODEL CSS STARTING */
+.custom-modal-width {
+    max-width: 400px; /* Adjust the width as needed */
+    width: 100%;
+  }
+/* MODEL CSS ENDING... */
+/* 🔥 Modal ko sirf card size tak limit */
+.otp-only-dialog {
+  max-width: fit-content !important;
+  margin: auto;
+}
+
+/* 🔥 Remove bootstrap default background */
+.otp-only-content {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* 🔥 Wrapper me koi background nahi */
+.otp-wrapper {
+  padding: 0;
+  background: transparent;
+}
+
+/* ✅ Final OTP Card */
+.otp-card {
+  width: 420px;
+  background: #f4f7ff;
+  padding: 35px;
+  border-radius: 22px;
+  border: 6px solid #5a73ff;
+}
+
+/* OTP box */
+.otp-box {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+}
+
+/* Inputs */
+.otp-input {
+  width: 55px;
+  height: 55px;
+  text-align: center;
+  font-size: 20px;
+  border-radius: 12px;
+  border: 1px solid #ccc;
+}
+
+/* Icon */
+.otp-icon {
+  width: 65px;
+  height: 65px;
+  background: #5a73ff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.otp-icon i {
+  color: white;
+  font-size: 26px;
 }

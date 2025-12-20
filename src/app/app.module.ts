@@ -35,6 +35,9 @@ import { PaymentCheckoutComponent } from './productContainer/payment-checkout/pa
 import {MatTooltipModule} from '@angular/material/tooltip';
 import { ToastManagerComponent } from './components/toastManager/toast-manager/toast-manager.component';
 import { OrdersComponent } from './customerDashboard/orders/orders.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -72,7 +75,10 @@ import { OrdersComponent } from './customerDashboard/orders/orders.component';
     MatStepperModule,
     MatExpansionModule,
     MatSliderModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatFormFieldModule,
+    MatInputModule,
+    
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [authInterceptorProviders, provideAnimationsAsync()],

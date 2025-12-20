@@ -4,7 +4,6 @@ import { AuthService } from '../../_services/auth.service';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 import { NgToastService } from 'ng-angular-popup';
-import CryptoJS from 'crypto-js';
 
 @Component({
   selector: 'app-forgot-password',
@@ -100,6 +99,17 @@ export class ForgotPasswordComponent {
       console.log('Response from server:', response);
     });
   }
-   
+
+
+
+
+
+
+
+
+
+
+
+
 
 }
