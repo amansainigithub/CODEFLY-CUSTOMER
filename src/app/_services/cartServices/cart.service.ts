@@ -73,6 +73,7 @@ export class CartService {
 
   const price = Number(sizeData.productPrice);
   const mrp = Number(sizeData.productMrp);
+  const productSizeId = sizeData.id;
   const discount = Number(((mrp - price) / mrp) * 100).toFixed(2);
 
   // 🔍 If item already in cart → update quantity
@@ -108,6 +109,7 @@ export class CartService {
       pColor: productData.productColor,
       pMrp: mrp,
       pCalculatedDiscount: discount,
+      productRowId: productSizeId, // Store the product size ID for reference
     };
 
     this.cartItems.push(cartItem);
